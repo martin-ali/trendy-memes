@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\TrendyMemes.Data.Common\TrendyMemes.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\TrendyMemes.Data.Models\TrendyMemes.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\TrendyMemes.Web.ViewModels\TrendyMemes.Web.ViewModels.csproj" />
     <ProjectReference Include="..\TrendyMemes.Services.Mapping\TrendyMemes.Services.Mapping.csproj" />
   </ItemGroup>
 
