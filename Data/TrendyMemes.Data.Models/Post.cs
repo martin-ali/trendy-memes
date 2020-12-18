@@ -1,6 +1,7 @@
-﻿namespace TrendyMemes.Data.Models
+namespace TrendyMemes.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using TrendyMemes.Data.Common.Models;
 
@@ -12,6 +13,11 @@
             this.Votes = new List<Vote>();
             this.Comments = new List<Comment>();
         }
+
+        [Required]
+        public string AuthorId { get; set; }
+
+        public ApplicationUser Author { get; set; }
 
         public IEnumerable<Tag> Tags { get; set; }
 
