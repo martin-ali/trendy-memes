@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Controllers
+﻿namespace TrendyMemes.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 

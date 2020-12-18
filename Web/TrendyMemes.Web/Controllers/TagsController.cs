@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-
-namespace TrendyMemes.Web.Controllers
+﻿namespace TrendyMemes.Web.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     public class TagsController : BaseController
     {
         public IActionResult AllByTag(int id)

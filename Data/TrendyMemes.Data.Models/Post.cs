@@ -1,6 +1,7 @@
-namespace TrendyMemes.Data.Models
+﻿namespace TrendyMemes.Data.Models
 {
     using System.Collections.Generic;
+
     using TrendyMemes.Data.Common.Models;
 
     public class Post : BaseDeletableModel<int>
