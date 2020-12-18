@@ -3,12 +3,12 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
+
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
     using TrendyMemes.Services.Data;
     using TrendyMemes.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

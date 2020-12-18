@@ -4,11 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using TrendyMemes.Common;
-    using TrendyMemes.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+
+    using TrendyMemes.Common;
+    using TrendyMemes.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

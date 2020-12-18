@@ -1,8 +1,9 @@
 ﻿namespace TrendyMemes.Data.Configurations
 {
-    using TrendyMemes.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using TrendyMemes.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

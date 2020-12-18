@@ -2,9 +2,9 @@
 {
     using System.Linq;
 
-    using TrendyMemes.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+
+    using TrendyMemes.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

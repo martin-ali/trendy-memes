@@ -4,14 +4,14 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
+    using Moq;
+
     using TrendyMemes.Data;
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
     using TrendyMemes.Data.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using Moq;
 
     using Xunit;
 

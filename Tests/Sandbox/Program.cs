@@ -5,6 +5,13 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
+
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+
     using TrendyMemes.Data;
     using TrendyMemes.Data.Common;
     using TrendyMemes.Data.Common.Repositories;
@@ -13,13 +20,6 @@
     using TrendyMemes.Data.Seeding;
     using TrendyMemes.Services.Data;
     using TrendyMemes.Services.Messaging;
-
-    using CommandLine;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
 
     public static class Program
     {

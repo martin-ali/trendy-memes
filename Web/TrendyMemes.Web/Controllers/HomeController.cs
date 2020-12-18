@@ -2,9 +2,9 @@
 {
     using System.Diagnostics;
 
-    using TrendyMemes.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+
+    using TrendyMemes.Web.ViewModels;
 
     public class HomeController : BaseController
     {
