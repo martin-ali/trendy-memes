@@ -1,4 +1,4 @@
-namespace TrendyMemes.Data.Models
+﻿namespace TrendyMemes.Data.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -13,6 +13,11 @@ namespace TrendyMemes.Data.Models
             this.Votes = new List<Vote>();
             this.Comments = new List<Comment>();
         }
+
+        [Required]
+        public int ImageId { get; set; }
+
+        public Image Image { get; set; }
 
         [Required]
         public string AuthorId { get; set; }
