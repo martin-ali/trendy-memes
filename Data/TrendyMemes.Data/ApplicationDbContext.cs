@@ -24,6 +24,8 @@
         {
         }
 
+        public DbSet<Image> Images { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
