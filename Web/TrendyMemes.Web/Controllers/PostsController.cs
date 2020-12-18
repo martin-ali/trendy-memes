@@ -8,5 +8,20 @@
         {
             return this.View();
         }
+
+        public IActionResult Trendy()
+        {
+            return this.View();
+        }
+
+        public IActionResult Rising()
+        {
+            return this.View();
+        }
+
+        public IActionResult New()
+        {
+            return this.View();
+        }
     }
 }
