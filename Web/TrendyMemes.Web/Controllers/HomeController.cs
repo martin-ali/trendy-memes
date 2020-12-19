@@ -8,16 +8,19 @@
 
     public class HomeController : BaseController
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return this.View();
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             return this.View();
         }
 
+        [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
