@@ -22,6 +22,11 @@
         [Required]
         public string AuthorId { get; set; }
 
+        [Required]
+        [MinLength(3)]
+        [MaxLength(20)]
+        public string Title { get; set; }
+
         public ApplicationUser Author { get; set; }
 
         public IEnumerable<Tag> Tags { get; set; }
