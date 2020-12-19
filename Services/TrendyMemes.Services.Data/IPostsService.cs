@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
 
-    using TrendyMemes.Web.ViewModels.Posts;
-
     public interface IPostsService
     {
-        IEnumerable<PostInListViewModel> GetAllPosts();
+        IEnumerable<T> GetAll<T>();
 
-        IEnumerable<PostInListViewModel> GetPostsByTag(int tagId);
+        IEnumerable<T> GetTopPercent<T>(double percentage);
 
-        PostDetailsViewModel GetPostById(int id);
+        IEnumerable<T> GetByTag<T>(int tagId);
+
+        T GetById<T>(int id);
     }
 }
