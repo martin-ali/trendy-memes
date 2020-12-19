@@ -1,0 +1,27 @@
+@model TrendyMemes.Web.ViewModels.Posts.PostsListViewModel
+
+<div class="container">
+    <div class="row">
+        @foreach (var post in Model.Posts)
+        {
+            <article class="card col-md-2 m-2">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-action="Details" asp-route-id="@post.Id">
+                            Title
+                        </a>
+                    </h5>
+                    <img class="card-img-top" src="https://5.imimg.com/data5/QC/QM/FP/SELLER-37649712/computer-processor-500x500.jpg" alt="Card image cap">
+                    <p class="card-text">
+                        @foreach (var tag in post.Tags)
+                        {
+                            <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
+                                @tag.Name&nbsp;
+                            </a>
+                        }
+                    </p>
+                </div>
+            </article>
+        }
+    </div>
+</div>
