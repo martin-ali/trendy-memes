@@ -15,17 +15,17 @@
         }
 
         [Required]
+        [MinLength(3)]
+        [MaxLength(20)]
+        public string Title { get; set; }
+
+        [Required]
         public int ImageId { get; set; }
 
         public Image Image { get; set; }
 
         [Required]
         public string AuthorId { get; set; }
-
-        [Required]
-        [MinLength(3)]
-        [MaxLength(20)]
-        public string Title { get; set; }
 
         public ApplicationUser Author { get; set; }
 
