@@ -27,6 +27,11 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new UsersSeeder(),
+                              new TagsSeeder(),
+                              new PostsSeeder(),
+                              new VotesSeeder(),
+                              new CommentsSeeder(),
                           };
 
             foreach (var seeder in seeders)
