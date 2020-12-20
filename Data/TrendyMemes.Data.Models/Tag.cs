@@ -15,6 +15,6 @@
         [Required]
         public string Name { get; set; }
 
-        public IEnumerable<Post> Posts { get; set; }
+        public virtual IEnumerable<Post> Posts { get; set; }
     }
 }

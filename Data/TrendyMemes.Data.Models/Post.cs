@@ -9,8 +9,8 @@
     {
         public Post()
         {
-            this.Tags = new List<Tag>();
-            this.Votes = new List<Vote>();
+            this.Tags = new HashSet<Tag>();
+            this.Votes = new HashSet<Vote>();
             this.Comments = new List<Comment>();
         }
 
@@ -18,6 +18,8 @@
         [MinLength(3)]
         [MaxLength(20)]
         public string Title { get; set; }
+
+        public int Rating { get; set; }
 
         [Required]
         public int ImageId { get; set; }
@@ -29,10 +31,10 @@
 
         public ApplicationUser Author { get; set; }
 
-        public IEnumerable<Tag> Tags { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
 
-        public IEnumerable<Vote> Votes { get; set; }
+        public virtual ICollection<Vote> Votes { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
