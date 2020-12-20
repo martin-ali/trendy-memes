@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.0" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
@@ -35,5 +35,20 @@
     <ProjectReference Include="..\..\Services\TrendyMemes.Services\TrendyMemes.Services.csproj" />
     <ProjectReference Include="..\TrendyMemes.Web.Infrastructure\TrendyMemes.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TrendyMemes.Web.ViewModels\TrendyMemes.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Comments\Data\" />
+    <Folder Include="Areas\Comments\Models\" />
+    <Folder Include="Areas\Comments\Views\" />
+    <Folder Include="Areas\Posts\Data\" />
+    <Folder Include="Areas\Posts\Models\" />
+    <Folder Include="Areas\Posts\Views\" />
+    <Folder Include="Areas\Settings\Data\" />
+    <Folder Include="Areas\Settings\Models\" />
+    <Folder Include="Areas\Settings\Views\" />
+    <Folder Include="Areas\Tags\Data\" />
+    <Folder Include="Areas\Tags\Models\" />
+    <Folder Include="Areas\Tags\Views\" />
   </ItemGroup>
 </Project>

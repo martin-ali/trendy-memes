@@ -1,17 +1,16 @@
-@model TrendyMemes.Web.ViewModels.Posts.PostsListViewModel
-
+@model TrendyMemes.Web.Areas.Posts.Viewmodels.PostsListViewModel;
 <div class="container">
     <div class="row">
         @foreach (var post in Model.Posts)
         {
-            <article class="card col-md-2 m-2">
+            <article class="card col-md-12 m-2">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h2 class="card-title text-center">
                         <a asp-action="Details" asp-route-id="@post.Id">
-                            Title
+                            @post.Title
                         </a>
-                    </h5>
-                    <img class="card-img-top" src="https://5.imimg.com/data5/QC/QM/FP/SELLER-37649712/computer-processor-500x500.jpg" alt="Card image cap">
+                    </h2>
+                    <img class="card-img-top" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" alt="Card image cap">
                     <p class="card-text">
                         @foreach (var tag in post.Tags)
                         {
@@ -19,6 +18,9 @@
                                 @tag.Name&nbsp;
                             </a>
                         }
+                    </p>
+                    <p class="card-text">
+                        @post.Score
                     </p>
                 </div>
             </article>

@@ -1,10 +1,12 @@
-﻿namespace TrendyMemes.Services.Data
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
     using TrendyMemes.Services.Mapping;
+    using TrendyMemes.Web.Areas.Posts.Viewmodels;
 
     public class PostsService : IPostsService
     {
@@ -14,10 +16,12 @@
         {
             this.postsRepository = postsRepository;
         }
+
         public IEnumerable<T> GetAll<T>()
         {
             var posts = this.postsRepository
                 .AllAsNoTracking()
+                .OrderByDescending(p => p.Votes.Sum(v => v.Value))
                 .To<T>()
                 .ToList();
 
@@ -31,7 +35,7 @@
 
             var posts = this.postsRepository
                 .AllAsNoTracking()
-                .OrderByDescending(p => p.Votes.Sum(v => v.IsUpvote ? 1 : -1))
+                .OrderByDescending(p => p.Votes.Sum(v => v.Value))
                 .Take(postsToTake)
                 .To<T>()
                 .ToList();
@@ -59,6 +63,11 @@
                 .ToList();
 
             return postsByTag;
+        }
+
+        public void Create(CreatePostInputModel input)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

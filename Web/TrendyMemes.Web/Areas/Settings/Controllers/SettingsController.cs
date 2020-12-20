@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Controllers
+﻿namespace TrendyMemes.Web.Areas.Settings.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -7,7 +7,8 @@
 
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
-    using TrendyMemes.Services.Data;
+    using TrendyMemes.Web.Areas.Settings.Services;
+    using TrendyMemes.Web.Controllers;
     using TrendyMemes.Web.ViewModels.Settings;
 
     public class SettingsController : BaseController

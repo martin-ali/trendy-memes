@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.ViewModels.Posts
+﻿namespace TrendyMemes.Web.Areas.Posts.Viewmodels
 {
     using System.Collections.Generic;
 

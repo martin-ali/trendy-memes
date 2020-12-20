@@ -1,6 +1,8 @@
-﻿namespace TrendyMemes.Web.Controllers
+﻿namespace TrendyMemes.Web.Areas.Tags.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+
+    using TrendyMemes.Web.Controllers;
 
     public class TagsController : BaseController
     {

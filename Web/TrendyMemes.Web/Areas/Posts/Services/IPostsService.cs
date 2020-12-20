@@ -1,6 +1,8 @@
-﻿namespace TrendyMemes.Services.Data
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
+
+    using TrendyMemes.Web.Areas.Posts.Viewmodels;
 
     public interface IPostsService
     {
@@ -11,5 +13,7 @@
         IEnumerable<T> GetByTag<T>(int tagId);
 
         T GetById<T>(int id);
+
+        void Create(CreatePostInputModel input);
     }
 }

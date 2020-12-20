@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Services.Data
+﻿namespace TrendyMemes.Web.Areas.Settings.Services
 {
     using System.Collections.Generic;
     using System.Linq;

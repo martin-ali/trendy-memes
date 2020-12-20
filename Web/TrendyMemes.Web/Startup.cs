@@ -17,9 +17,11 @@
     using TrendyMemes.Data.Models;
     using TrendyMemes.Data.Repositories;
     using TrendyMemes.Data.Seeding;
-    using TrendyMemes.Services.Data;
     using TrendyMemes.Services.Mapping;
     using TrendyMemes.Services.Messaging;
+    using TrendyMemes.Web.Areas.Posts.Services;
+    using TrendyMemes.Web.Areas.Posts.Viewmodels;
+    using TrendyMemes.Web.Areas.Settings.Services;
     using TrendyMemes.Web.ViewModels;
 
     public class Startup
@@ -65,12 +67,15 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IPostsService, PostsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(PostInListViewModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
