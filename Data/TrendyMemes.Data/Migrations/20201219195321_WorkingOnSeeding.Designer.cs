@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrendyMemes.Data;
 
 namespace TrendyMemes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201219195321_WorkingOnSeeding")]
+    partial class WorkingOnSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -393,11 +395,9 @@ namespace TrendyMemes.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -453,6 +453,9 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsUpvote")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -462,9 +465,6 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -546,7 +546,7 @@ namespace TrendyMemes.Data.Migrations
             modelBuilder.Entity("TrendyMemes.Data.Models.Comment", b =>
                 {
                     b.HasOne("TrendyMemes.Data.Models.ApplicationUser", "Author")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -565,7 +565,7 @@ namespace TrendyMemes.Data.Migrations
             modelBuilder.Entity("TrendyMemes.Data.Models.Post", b =>
                 {
                     b.HasOne("TrendyMemes.Data.Models.ApplicationUser", "Author")
-                        .WithMany("Posts")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -590,7 +590,7 @@ namespace TrendyMemes.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("TrendyMemes.Data.Models.ApplicationUser", "User")
-                        .WithMany("Votes")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -604,15 +604,9 @@ namespace TrendyMemes.Data.Migrations
                 {
                     b.Navigation("Claims");
 
-                    b.Navigation("Comments");
-
                     b.Navigation("Logins");
 
-                    b.Navigation("Posts");
-
                     b.Navigation("Roles");
-
-                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("TrendyMemes.Data.Models.Post", b =>

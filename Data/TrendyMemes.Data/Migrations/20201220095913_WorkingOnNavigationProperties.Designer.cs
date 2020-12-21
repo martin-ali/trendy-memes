@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrendyMemes.Data;
 
 namespace TrendyMemes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201220095913_WorkingOnNavigationProperties")]
+    partial class WorkingOnNavigationProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -453,6 +455,9 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsUpvote")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -462,9 +467,6 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
