@@ -19,7 +19,7 @@
             var posts = dbContext.Posts.ToList();
             var random = new Random();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 // Do title and image
                 var author = users[random.Next(0, users.Count)];
@@ -32,7 +32,8 @@
                     Content = $"Comment-{i + 1}",
                 };
 
-                await dbContext.Comments.AddAsync(comment);
+                post.Comments.Add(comment);
+                author.Comments.Add(comment);
             }
         }
     }

@@ -10,8 +10,6 @@
 
     public class PostsSeeder : ISeeder
     {
-        private int currentImage = 1;
-
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Posts.Any())
@@ -25,28 +23,23 @@
 
             for (int i = 0; i < 100; i++)
             {
-                // Do title and image
-                var author = users[random.Next(0, users.Count)];
-
+                // Main properties
                 var post = new Post
                 {
                     Title = $"Post-{i + 1}",
-                    Author = author,
                     Image = this.GetImage(),
                 };
 
-                // Add count of random rags
-                var tagsCount = random.Next(1, 10);
-                var selectedTags = new HashSet<Tag>();
+                var author = users[random.Next(0, users.Count)];
+                author.Posts.Add(post);
 
+                // Random tags
+                var tagsCount = random.Next(1, 5);
                 for (int j = 0; j < tagsCount; j++)
                 {
                     var selectedTag = tags[random.Next(0, tags.Count)];
-                    selectedTags.Add(selectedTag);
+                    post.Tags.Add(selectedTag);
                 }
-
-                post.Tags = selectedTags;
-                await dbContext.Posts.AddAsync(post);
             }
         }
 
@@ -54,7 +47,8 @@
         {
             var image = new Image
             {
-                Extension = "png"
+                Extension = "png",
+                Path = "C:\\Users\\marto\\OneDrive\\Desktop\\trendy-memes\\Data\\TrendyMemes.Data\\Seeding\\Images\\11.jpg",
             };
 
             return image;

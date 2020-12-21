@@ -19,20 +19,20 @@
             var posts = dbContext.Posts.ToList();
             var random = new Random();
 
-            for (int i = 0; i < 2000; i++)
+            for (int i = 0; i < 2001; i++)
             {
                 var user = users[random.Next(0, users.Count)];
                 var post = posts[random.Next(0, posts.Count)];
-                var isUpvote = random.Next(0, 2) % 2 == 0;
+                // Generate random of either -1 or 1, but not 0
+                var value = random.Next(0, 2) * 2 - 1;
 
                 var vote = new Vote
                 {
-                    Post = post,
-                    User = user,
-                    IsUpvote = isUpvote,
+                    Value = value,
                 };
 
-                await dbContext.Votes.AddAsync(vote);
+                user.Votes.Add(vote);
+                post.Votes.Add(vote);
             }
         }
     }
