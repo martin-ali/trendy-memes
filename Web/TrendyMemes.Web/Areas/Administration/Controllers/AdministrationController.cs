@@ -7,7 +7,7 @@
     using TrendyMemes.Web.Controllers;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-    [Area("Administration")]
+    [Area(GlobalConstants.AdministrationArea)]
     public class AdministrationController : BaseController
     {
     }
