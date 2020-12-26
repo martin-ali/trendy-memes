@@ -45,8 +45,9 @@
 
         public IEnumerable<T> GetTopPercent<T>(double percentageToSkip, double percentageToTake)
         {
-            var fractionTake = 100 / percentageToTake;
             var fractionSkip = 100 / percentageToSkip;
+            var fractionTake = 100 / percentageToTake;
+
             var postsToSkip = (int)(this.postsRepository.All().Count() / fractionSkip);
             var postsToTake = (int)(this.postsRepository.All().Count() / fractionTake);
 
