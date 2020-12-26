@@ -1,7 +1,7 @@
 ﻿namespace TrendyMemes.Web.Areas.Administration.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using TrendyMemes.Web.Areas.Settings.Services;
+    using TrendyMemes.Services.Data;
     using TrendyMemes.Web.ViewModels.Administration.Dashboard;
 
     public class DashboardController : AdministrationController
