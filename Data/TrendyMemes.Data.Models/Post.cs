@@ -9,7 +9,7 @@
     {
         public Post()
         {
-            this.Tags = new HashSet<Tag>();
+            this.Tags = new HashSet<PostTag>();
             this.Votes = new HashSet<Vote>();
             this.Comments = new List<Comment>();
         }
@@ -31,7 +31,7 @@
 
         public ApplicationUser Author { get; set; }
 
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<PostTag> Tags { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
 
