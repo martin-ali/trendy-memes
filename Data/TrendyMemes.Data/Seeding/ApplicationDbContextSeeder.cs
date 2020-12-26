@@ -29,6 +29,7 @@
                 new SettingsSeeder(),
                 new UsersSeeder(),
                 new TagsSeeder(),
+                new ImagesSeeder(),
                 new PostsSeeder(),
                 new VotesSeeder(),
                 new CommentsSeeder(),

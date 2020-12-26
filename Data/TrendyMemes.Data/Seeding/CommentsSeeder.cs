@@ -21,7 +21,6 @@
 
             for (int i = 0; i < 1000; i++)
             {
-                // Do title and image
                 var author = users[random.Next(0, users.Count)];
                 var post = posts[random.Next(0, posts.Count)];
 
@@ -34,6 +33,8 @@
 
                 post.Comments.Add(comment);
                 author.Comments.Add(comment);
+
+                await dbContext.Comments.AddAsync(comment);
             }
         }
     }

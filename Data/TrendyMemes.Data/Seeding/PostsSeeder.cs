@@ -19,39 +19,39 @@
 
             var users = dbContext.Users.ToList();
             var tags = dbContext.Tags.ToList();
+            var images = dbContext.Images.ToList();
             var random = new Random();
 
             for (int i = 0; i < 100; i++)
             {
+                var author = users[random.Next(0, users.Count)];
+                var image = images[random.Next(0, images.Count)];
+
                 // Main properties
                 var post = new Post
                 {
                     Title = $"Post-{i + 1}",
-                    Image = this.GetImage(),
+                    Author = author,
+                    Image = image,
                 };
-
-                var author = users[random.Next(0, users.Count)];
-                author.Posts.Add(post);
 
                 // Random tags
                 var tagsCount = random.Next(1, 5);
                 for (int j = 0; j < tagsCount; j++)
                 {
-                    var selectedTag = tags[random.Next(0, tags.Count)];
-                    post.Tags.Add(selectedTag);
+                    var tag = tags[random.Next(0, tags.Count)];
+                    var postTag = new PostTag
+                    {
+                        PostId = post.Id,
+                        TagId = tag.Id,
+                    };
+
+                    post.Tags.Add(postTag);
+                    tag.Posts.Add(postTag);
                 }
+
+                await dbContext.Posts.AddAsync(post);
             }
-        }
-
-        private Image GetImage()
-        {
-            var image = new Image
-            {
-                Extension = "png",
-                Path = "C:\\Users\\marto\\OneDrive\\Desktop\\trendy-memes\\Data\\TrendyMemes.Data\\Seeding\\Images\\11.jpg",
-            };
-
-            return image;
         }
     }
 }
