@@ -4,7 +4,6 @@
 
     using TrendyMemes.Data.Models;
     using TrendyMemes.Services.Mapping;
-    using TrendyMemes.Web.Areas.Tags.ViewModels;
     using TrendyMemes.Web.ViewModels.Comments;
 
     public class PostDetailsViewModel : PostInListViewModel, IMapFrom<Post>
