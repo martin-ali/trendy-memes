@@ -8,6 +8,6 @@
     {
         Task WriteImageFromHttp(IFormFile file, string fileName, string extension);
 
-        Task WriteImageFromBytes(byte[] image, string name);
+        Task WriteImageFromBytes(byte[] image, string name, string extension);
     }
 }

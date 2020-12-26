@@ -31,9 +31,9 @@
             await file.CopyToAsync(fileStream);
         }
 
-        public async Task WriteImageFromBytes(byte[] image, string name)
+        public async Task WriteImageFromBytes(byte[] image, string name, string extension)
         {
-            var path = Path.Combine(this.imagesPath, name);
+            var path = Path.Combine(this.imagesPath, $"{name}.{extension}");
             await File.WriteAllBytesAsync(path, image);
         }
     }

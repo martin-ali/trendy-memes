@@ -50,7 +50,7 @@
                 };
 
                 var bytes = await File.ReadAllBytesAsync(seedPath);
-                await fileWriter.WriteImageFromBytes(bytes, image.Id);
+                await fileWriter.WriteImageFromBytes(bytes, image.Id, extension);
 
                 await dbContext.Images.AddAsync(image);
             }
