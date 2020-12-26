@@ -17,6 +17,6 @@
         public ApplicationUser User { get; set; }
 
         [Required]
-        public bool IsUpvote { get; set; }
+        public int Value { get; set; }
     }
 }
