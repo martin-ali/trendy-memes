@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -28,14 +28,17 @@
             return posts;
         }
 
-        public IEnumerable<T> GetTopPercent<T>(double percentage)
+        public IEnumerable<T> GetTopPercent<T>(double percentageToSkip, double percentageToTake)
         {
-            var fraction = 100 / percentage;
-            var postsToTake = (int)(this.postsRepository.All().Count() / fraction);
+            var fractionTake = 100 / percentageToTake;
+            var fractionSkip = 100 / percentageToSkip;
+            var postsToSkip = (int)(this.postsRepository.All().Count() / fractionSkip);
+            var postsToTake = (int)(this.postsRepository.All().Count() / fractionTake);
 
             var posts = this.postsRepository
                 .AllAsNoTracking()
                 .OrderByDescending(p => p.Votes.Sum(v => v.Value))
+                .Skip(postsToSkip)
                 .Take(postsToTake)
                 .To<T>()
                 .ToList();

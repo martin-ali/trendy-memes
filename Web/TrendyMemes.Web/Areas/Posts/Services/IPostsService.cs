@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
 
@@ -8,7 +8,7 @@
     {
         IEnumerable<T> GetAll<T>();
 
-        IEnumerable<T> GetTopPercent<T>(double percentage);
+        IEnumerable<T> GetTopPercent<T>(double percentageToSkip, double percentageToTake);
 
         IEnumerable<T> GetByTag<T>(int tagId);
 
