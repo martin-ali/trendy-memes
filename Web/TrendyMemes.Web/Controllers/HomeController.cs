@@ -14,7 +14,7 @@
             return this.View();
         }
 
-        [HttpGet]
+        [HttpGet(nameof(Privacy))]
         public IActionResult Privacy()
         {
             return this.View();
