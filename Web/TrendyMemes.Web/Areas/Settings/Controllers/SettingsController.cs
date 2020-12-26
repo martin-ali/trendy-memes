@@ -5,12 +5,14 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    using TrendyMemes.Common;
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
-    using TrendyMemes.Web.Areas.Settings.Services;
+    using TrendyMemes.Services.Data;
     using TrendyMemes.Web.Controllers;
     using TrendyMemes.Web.ViewModels.Settings;
 
+    [Area(GlobalConstants.SettingsArea)]
     public class SettingsController : BaseController
     {
         private readonly ISettingsService settingsService;
