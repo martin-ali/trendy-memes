@@ -10,8 +10,8 @@ using TrendyMemes.Data;
 namespace TrendyMemes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201225231944_t")]
-    partial class t
+    [Migration("20201226190159_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -337,10 +337,8 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageId1")
+                    b.Property<string>("ImageId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -361,7 +359,7 @@ namespace TrendyMemes.Data.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("ImageId1");
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -585,7 +583,9 @@ namespace TrendyMemes.Data.Migrations
 
                     b.HasOne("TrendyMemes.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId1");
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Author");
 
