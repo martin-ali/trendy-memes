@@ -30,20 +30,25 @@
     <ProjectReference Include="..\..\Data\TrendyMemes.Data.Models\TrendyMemes.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\TrendyMemes.Data\TrendyMemes.Data.csproj" />
     <ProjectReference Include="..\..\Services\TrendyMemes.Services.Data\TrendyMemes.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\TrendyMemes.Services.IO\TrendyMemes.Services.IO.csproj" />
     <ProjectReference Include="..\..\Services\TrendyMemes.Services.Mapping\TrendyMemes.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\TrendyMemes.Services.Messaging\TrendyMemes.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\TrendyMemes.Services\TrendyMemes.Services.csproj" />
     <ProjectReference Include="..\TrendyMemes.Web.Infrastructure\TrendyMemes.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TrendyMemes.Web.ViewModels\TrendyMemes.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Services\TrendyMemes.Services.Validation\TrendyMemes.Services.Validation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Comments\Data\" />
     <Folder Include="Areas\Comments\Models\" />
     <Folder Include="Areas\Comments\Views\" />
+    <Folder Include="Areas\Comments\ViewsModels\" />
     <Folder Include="Areas\Posts\Data\" />
     <Folder Include="Areas\Posts\Models\" />
     <Folder Include="Areas\Posts\Views\" />
+    <Folder Include="Areas\Posts\Services\" />
+    <Folder Include="Areas\Posts\ViewsModels\" />
     <Folder Include="Areas\Settings\Data\" />
     <Folder Include="Areas\Settings\Models\" />
     <Folder Include="Areas\Settings\Views\" />
