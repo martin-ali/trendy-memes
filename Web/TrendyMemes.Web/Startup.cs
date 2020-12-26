@@ -17,11 +17,16 @@
     using TrendyMemes.Data.Models;
     using TrendyMemes.Data.Repositories;
     using TrendyMemes.Data.Seeding;
+    using TrendyMemes.Services.Data;
+    using TrendyMemes.Services.IO;
     using TrendyMemes.Services.Mapping;
     using TrendyMemes.Services.Messaging;
+    using TrendyMemes.Services.Validation;
+    using TrendyMemes.Web.Areas.Comments.Services;
+    using TrendyMemes.Web.Areas.Identity.Services;
     using TrendyMemes.Web.Areas.Posts.Services;
-    using TrendyMemes.Web.Areas.Posts.Viewmodels;
-    using TrendyMemes.Web.Areas.Settings.Services;
+    using TrendyMemes.Web.Areas.Posts.ViewModels;
+    using TrendyMemes.Web.Areas.Tags.Services;
     using TrendyMemes.Web.ViewModels;
 
     public class Startup
@@ -65,9 +70,15 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
+            // Theory: Make base service class, gather all inheritors, and register them with reflection?
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPostsService, PostsService>();
+            services.AddTransient<ITagsService, TagsService>();
+            services.AddTransient<IFileWriter, FileWriter>();
+            services.AddTransient<IFileValidator, FileValidator>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,6 +109,12 @@
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(
+            // Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images")),
+            //     RequestPath = "/wwwroot/images"
+            // });
             app.UseCookiePolicy();
 
             app.UseRouting();
