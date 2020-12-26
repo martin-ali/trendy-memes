@@ -10,8 +10,8 @@ using TrendyMemes.Data;
 namespace TrendyMemes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201219170252_WorkingOnImages")]
-    partial class WorkingOnImages
+    [Migration("20201225231944_t")]
+    partial class t
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,21 +123,6 @@ namespace TrendyMemes.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("PostTag", b =>
-                {
-                    b.Property<int>("PostsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PostsId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("PostTag");
                 });
 
             modelBuilder.Entity("TrendyMemes.Data.Models.ApplicationRole", b =>
@@ -303,10 +288,8 @@ namespace TrendyMemes.Data.Migrations
 
             modelBuilder.Entity("TrendyMemes.Data.Models.Image", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -315,6 +298,7 @@ namespace TrendyMemes.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Extension")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -323,9 +307,15 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserAddedId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserAddedId");
 
                     b.ToTable("Images");
                 });
@@ -350,11 +340,17 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<int>("ImageId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImageId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -365,11 +361,33 @@ namespace TrendyMemes.Data.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("ImageId");
+                    b.HasIndex("ImageId1");
 
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("TrendyMemes.Data.Models.PostTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("PostTags");
                 });
 
             modelBuilder.Entity("TrendyMemes.Data.Models.Setting", b =>
@@ -392,9 +410,11 @@ namespace TrendyMemes.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -450,9 +470,6 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsUpvote")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -462,6 +479,9 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -525,25 +545,10 @@ namespace TrendyMemes.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PostTag", b =>
-                {
-                    b.HasOne("TrendyMemes.Data.Models.Post", null)
-                        .WithMany()
-                        .HasForeignKey("PostsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("TrendyMemes.Data.Models.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TrendyMemes.Data.Models.Comment", b =>
                 {
                     b.HasOne("TrendyMemes.Data.Models.ApplicationUser", "Author")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -559,23 +564,51 @@ namespace TrendyMemes.Data.Migrations
                     b.Navigation("Post");
                 });
 
+            modelBuilder.Entity("TrendyMemes.Data.Models.Image", b =>
+                {
+                    b.HasOne("TrendyMemes.Data.Models.ApplicationUser", "UserAdded")
+                        .WithMany()
+                        .HasForeignKey("UserAddedId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("UserAdded");
+                });
+
             modelBuilder.Entity("TrendyMemes.Data.Models.Post", b =>
                 {
                     b.HasOne("TrendyMemes.Data.Models.ApplicationUser", "Author")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TrendyMemes.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ImageId1");
 
                     b.Navigation("Author");
 
                     b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("TrendyMemes.Data.Models.PostTag", b =>
+                {
+                    b.HasOne("TrendyMemes.Data.Models.Post", "Post")
+                        .WithMany("Tags")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TrendyMemes.Data.Models.Tag", "Tag")
+                        .WithMany("Posts")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("TrendyMemes.Data.Models.Vote", b =>
@@ -587,7 +620,7 @@ namespace TrendyMemes.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("TrendyMemes.Data.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Votes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -601,16 +634,29 @@ namespace TrendyMemes.Data.Migrations
                 {
                     b.Navigation("Claims");
 
+                    b.Navigation("Comments");
+
                     b.Navigation("Logins");
 
+                    b.Navigation("Posts");
+
                     b.Navigation("Roles");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("TrendyMemes.Data.Models.Post", b =>
                 {
                     b.Navigation("Comments");
 
+                    b.Navigation("Tags");
+
                     b.Navigation("Votes");
+                });
+
+            modelBuilder.Entity("TrendyMemes.Data.Models.Tag", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }
