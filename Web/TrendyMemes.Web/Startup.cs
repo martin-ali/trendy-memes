@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web
+namespace TrendyMemes.Web
 {
     using System.Reflection;
 
@@ -79,6 +79,7 @@
             services.AddTransient<IFileValidator, FileValidator>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<IVotesService, VotesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

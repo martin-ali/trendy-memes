@@ -22,7 +22,7 @@
         public int Rating { get; set; }
 
         [Required]
-        public int ImageId { get; set; }
+        public string ImageId { get; set; }
 
         public Image Image { get; set; }
 

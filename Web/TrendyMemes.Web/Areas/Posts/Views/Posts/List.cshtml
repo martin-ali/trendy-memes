@@ -20,9 +20,9 @@
                         }
                     </p>
                     <div class="row">
-                        <button class="col-md-4 btn-success">Upvote</button>
-                        <h3 class="text-center col-md-4 card-text @(post.Score>0?"text-success":"text-danger")"> @post.Score </h3>
-                        <button class="col-md-4 btn-danger">Downvote</button>
+                        <a asp-controller="Votes" asp-action="Upvote" asp-route-id="@post.Id" class="col-md-2 btn btn-success" onclick="return false;">Upvote</a>
+                        <h3 class="col-md-2 text-center card-text @(post.Score>0?"text-success":"text-danger")"> @post.Score </h3>
+                        <a asp-controller="Votes" asp-action="Downvote" asp-route-id="@post.Id" class="col-md-2 btn btn-danger" onclick="return false;">Downvote</a>
                     </div>
                 </div>
             </article>
