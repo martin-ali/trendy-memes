@@ -1,8 +1,9 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-    using TrendyMemes.Web.Areas.Posts.Viewmodels;
+    using TrendyMemes.Web.Areas.Posts.ViewModels;
 
     public interface IPostsService
     {
@@ -10,10 +11,10 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
         IEnumerable<T> GetTopPercent<T>(double percentageToSkip, double percentageToTake);
 
-        IEnumerable<T> GetByTag<T>(int tagId);
+        IEnumerable<T> GetByTagId<T>(int tagId);
 
         T GetById<T>(int id);
 
-        void Create(CreatePostInputModel input);
+        Task<int> CreateAsync(PostCreateInputModel input, string authorId, IEnumerable<string> inputTags);
     }
 }
