@@ -19,10 +19,13 @@
     <div class="row">
         @if (User.Identity.IsAuthenticated)
         {
-            <form asp-controller="Comments" asp-action="Create" method="post" class="w-100 card-body border m-2" onsubmit="return">
+            <form asp-controller="Comments" asp-action="Create" method="post" class="w-100 card-body border m-2">
+                @* <span asp-validation-for="Content" class="text-danger"></span> *@
                 <textarea name="Content" placeholder="Type your comment here" rows="3" class="w-100 border-0"></textarea>
                 <input type="hidden" name="PostId" value="@Model.Id" />
                 <button type="submit" class="btn btn-primary">Post comment</button>
+                @* <button type="reset" class="btn btn-danger">Clear</button> *@
+                @* Posting as @User.Identity.Name *@
             </form>
         }
         @foreach (var comment in Model.Comments)

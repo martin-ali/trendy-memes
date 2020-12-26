@@ -1,6 +1,7 @@
 ﻿namespace TrendyMemes.Web.Areas.Posts.ViewModels
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     using AutoMapper;
@@ -26,14 +27,23 @@
 
         public string ImagePath { get; set; }
 
+        public string ImageExtension { get; set; }
+
         public int Score { get; set; }
 
         public IEnumerable<TagInListViewModel> Tags { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
+            // NOTE: This is a hack for an issue I could not solve. The code sucks and I am ashamed of it, but time is of the essence
             configuration.CreateMap<Post, PostInListViewModel>()
-                .ForMember(pl => pl.Score, opt => opt.MapFrom(p => p.Votes.Sum(v => v.Value)));
+                .ForMember(vm => vm.Score, opt => opt.MapFrom(p => p.Votes.Sum(v => v.Value)))
+                .ForMember(vm => vm.ImagePath, opt => opt.MapFrom(p => Path.Combine(@"images", $"{p.ImageId}.{p.Image.Extension}")));
+
+            // FIXME: Copy-paste. How to avoid?
+            configuration.CreateMap<Post, PostDetailsViewModel>()
+                .ForMember(vm => vm.Score, opt => opt.MapFrom(p => p.Votes.Sum(v => v.Value)))
+                .ForMember(vm => vm.ImagePath, opt => opt.MapFrom(p => Path.Combine(@"images", $"{p.ImageId}.{p.Image.Extension}")));
         }
     }
 }

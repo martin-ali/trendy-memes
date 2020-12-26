@@ -1,5 +1,5 @@
 @model TrendyMemes.Web.Areas.Posts.ViewModels.PostsListViewModel;
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         @foreach (var post in Model.Posts)
         {
@@ -10,8 +10,11 @@
                             @post.Title
                         </a>
                     </h2>
-                    <img class="card-img-top" src="@post.ImagePath" alt="Card image cap">
+                    <a asp-action="Details" asp-route-id="@post.Id">
+                        <img src="@post.ImagePath" alt="Post image" class="card-img-top" />
+                    </a>
                     <p class="card-text">
+                        Tags:
                         @foreach (var tag in post.Tags)
                         {
                             <a asp-action="ByTagId" asp-route-id="@tag.Id">
