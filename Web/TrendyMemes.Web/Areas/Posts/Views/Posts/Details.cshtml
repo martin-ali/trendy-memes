@@ -3,26 +3,31 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 row-md-12">
-            <h2 class="card-title">
+            <h2 class="card-title text-center">
                 @Model.Title
             </h2>
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" alt="Card image cap">
+            <img class="card-img-top" src="@Model.ImagePath" alt="Card image cap">
             <p class="card-text">
                 Tags:
                 @foreach (var tag in Model.Tags)
                 {
-                    <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
-                        @tag.Name,
-                    </a>
+                    <a asp-action="ByTagId" asp-route-id="@tag.Id"> @tag.Name </a>
                 }
             </p>
         </div>
     </div>
     <div class="row">
+        <form asp-area="Comments" asp-controller="Comments" asp-action="Create" method="post" class="w-100" onsubmit="return">
+            <textarea name="Content" placeholder="Type your comment here" rows="2" class="w-100"></textarea>
+            <input type="hidden" name="PostId" value="@Model.Id" />
+            <button type="submit" class="btn btn-secondary">Add comment</button>
+        </form>
         @foreach (var comment in Model.Comments)
         {
             <div class="col-md-12 border">
-                <p>@comment.AuthorUsername</p>
+                <a asp-area="Identity" asp-controller="Users" asp-action="Details" asp-route-id="@comment.AuthorId">
+                    <h6 class="h6"> @comment.AuthorUsername </h6>
+                </a>
                 <p>@comment.Content</p>
             </div>
         }
