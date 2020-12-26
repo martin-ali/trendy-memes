@@ -40,10 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Comments\Data\" />
-    <Folder Include="Areas\Comments\Models\" />
-    <Folder Include="Areas\Comments\Views\" />
-    <Folder Include="Areas\Comments\ViewsModels\" />
     <Folder Include="Areas\Posts\Data\" />
     <Folder Include="Areas\Posts\Models\" />
     <Folder Include="Areas\Posts\Views\" />
@@ -52,8 +48,5 @@
     <Folder Include="Areas\Settings\Data\" />
     <Folder Include="Areas\Settings\Models\" />
     <Folder Include="Areas\Settings\Views\" />
-    <Folder Include="Areas\Tags\Data\" />
-    <Folder Include="Areas\Tags\Models\" />
-    <Folder Include="Areas\Tags\Views\" />
   </ItemGroup>
 </Project>

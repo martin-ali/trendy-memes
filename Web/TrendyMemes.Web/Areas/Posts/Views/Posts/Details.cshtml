@@ -17,14 +17,17 @@
         </div>
     </div>
     <div class="row">
-        <form asp-area="Comments" asp-controller="Comments" asp-action="Create" method="post" class="w-100" onsubmit="return">
-            <textarea name="Content" placeholder="Type your comment here" rows="2" class="w-100"></textarea>
-            <input type="hidden" name="PostId" value="@Model.Id" />
-            <button type="submit" class="btn btn-secondary">Add comment</button>
-        </form>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form asp-controller="Comments" asp-action="Create" method="post" class="w-100 card-body border m-2" onsubmit="return">
+                <textarea name="Content" placeholder="Type your comment here" rows="3" class="w-100 border-0"></textarea>
+                <input type="hidden" name="PostId" value="@Model.Id" />
+                <button type="submit" class="btn btn-primary">Post comment</button>
+            </form>
+        }
         @foreach (var comment in Model.Comments)
         {
-            <div class="col-md-12 border">
+            <div class="w-100 border card-body m-2">
                 <a asp-area="Identity" asp-controller="Users" asp-action="Details" asp-route-id="@comment.AuthorId">
                     <h6 class="h6"> @comment.AuthorUsername </h6>
                 </a>

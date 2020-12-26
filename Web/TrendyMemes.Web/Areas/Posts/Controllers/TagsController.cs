@@ -5,7 +5,7 @@
     using TrendyMemes.Common;
     using TrendyMemes.Web.Controllers;
 
-    [Area(GlobalConstants.TagsArea)]
+    [Area(GlobalConstants.PostsArea)]
     public class TagsController : BaseController
     {
         public IActionResult AllByTag(int id)

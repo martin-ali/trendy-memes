@@ -19,9 +19,11 @@
                             </a>
                         }
                     </p>
-                    <p class="card-text">
-                        @post.Score
-                    </p>
+                    <div class="row">
+                        <button class="col-md-4 btn-success">Upvote</button>
+                        <h3 class="text-center col-md-4 card-text @(post.Score>0?"text-success":"text-danger")"> @post.Score </h3>
+                        <button class="col-md-4 btn-danger">Downvote</button>
+                    </div>
                 </div>
             </article>
         }

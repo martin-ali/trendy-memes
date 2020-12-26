@@ -12,15 +12,11 @@
 
         public const string AdministrationArea = "Administration";
 
-        public const string CommentsArea = "Comments";
-
         public const string IdentityArea = "Identity";
 
         public const string PostsArea = "Posts";
 
         public const string SettingsArea = "Settings";
-
-        public const string TagsArea = "Tags";
 
         public const double TopPostsPercentageInTrendyCategory = 10;
 

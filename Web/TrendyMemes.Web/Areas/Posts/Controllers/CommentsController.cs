@@ -13,7 +13,7 @@
     using TrendyMemes.Web.Areas.Posts.Controllers;
     using TrendyMemes.Web.Controllers;
 
-    [Area(GlobalConstants.CommentsArea)]
+    [Area(GlobalConstants.PostsArea)]
     public class CommentsController : BaseController
     {
         private readonly ICommentsService commentsService;
@@ -43,6 +43,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Edit()
         {
             return this.View();
