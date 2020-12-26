@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
@@ -40,6 +40,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendyMemes.Web.ViewModels", "Web\TrendyMemes.Web.ViewModels\TrendyMemes.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendyMemes.Services.IO", "Services\TrendyMemes.Services.IO\TrendyMemes.Services.IO.csproj", "{C136E170-CC08-44D6-9A62-240A1AB25493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendyMemes.Services.Validation", "Services\TrendyMemes.Services.Validation\TrendyMemes.Services.Validation.csproj", "{1DC9F0EA-841D-4BEE-87D4-B467F27EEA14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +109,10 @@ Global
 		{C136E170-CC08-44D6-9A62-240A1AB25493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C136E170-CC08-44D6-9A62-240A1AB25493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C136E170-CC08-44D6-9A62-240A1AB25493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DC9F0EA-841D-4BEE-87D4-B467F27EEA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC9F0EA-841D-4BEE-87D4-B467F27EEA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC9F0EA-841D-4BEE-87D4-B467F27EEA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC9F0EA-841D-4BEE-87D4-B467F27EEA14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +132,7 @@ Global
 		{3EE06C6E-C8F3-418A-A309-8AC81976A074} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
 		{C136E170-CC08-44D6-9A62-240A1AB25493} = {516E002B-9E6E-4456-B7F6-EAA353966DE6}
+		{1DC9F0EA-841D-4BEE-87D4-B467F27EEA14} = {516E002B-9E6E-4456-B7F6-EAA353966DE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384484BE-4680-4529-9CC2-AD37BA4D12D1}
