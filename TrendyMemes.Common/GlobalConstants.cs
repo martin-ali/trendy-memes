@@ -18,6 +18,8 @@
 
         public const string SettingsArea = "Settings";
 
+        public const string HomeArea = "Home";
+
         public const double TopPostsPercentageInTrendyCategory = 10;
 
         public const double TopPostsPercentageInRisingCategory = 40;
