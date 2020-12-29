@@ -55,6 +55,17 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
             await this.tagsRepository.AddAsync(tag);
 
+
+        public async Task<Tag> GuaranteeTagAsync(string name)
+        {
+            var tag = this.tagsRepository.AllAsNoTracking()
+                .FirstOrDefault(t => t.Name == name);
+
+            if (tag == null)
+            {
+                tag = await this.CreateTagAsync(name);
+            }
+
             return tag;
         }
     }

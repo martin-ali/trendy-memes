@@ -14,5 +14,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
         Tag GetById(int id);
 
         Task<Tag> CreateTagAsync(string name);
+
+        Task<Tag> GuaranteeTagAsync(string name);
     }
 }
