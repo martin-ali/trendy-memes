@@ -1,3 +1,16 @@
 @model TrendyMemes.Web.Areas.Identity.ViewModels.UserDetailsViewModel;
 
-<h1>@Model.Username</h1>
+<div class="container">
+    <div class="row">
+        <h1>@Model.Username</h1>
+    </div>
+    <div class="row">
+        <h1>@Model.Email</h1>
+    </div>
+    <div class="row">
+        Posts: @Model.Posts.Count
+    </div>
+    <div class="row">
+        Comments: @Model.Comments.Count
+    </div>
+</div>
