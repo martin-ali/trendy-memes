@@ -16,5 +16,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
         T GetById<T>(int id);
 
         Task<int> CreateAsync(PostCreateInputModel input, string authorId, IEnumerable<string> inputTags);
+
+        IEnumerable<T> GetByUserId<T>(string userId);
     }
 }

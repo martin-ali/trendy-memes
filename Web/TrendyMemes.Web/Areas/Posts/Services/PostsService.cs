@@ -77,6 +77,17 @@ namespace TrendyMemes.Web.Areas.Posts.Services
             return postsByTag;
         }
 
+        public IEnumerable<T> GetByUserId<T>(string userId)
+        {
+            var postsByTag = this.postsRepository
+                .AllAsNoTracking()
+                .Where(p => p.AuthorId == userId)
+                .To<T>()
+                .ToList();
+
+            return postsByTag;
+        }
+
         public async Task<int> CreateAsync(PostCreateInputModel input, string authorId, IEnumerable<string> inputTags)
         {
             var post = new Post
