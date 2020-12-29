@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Controllers
+﻿namespace TrendyMemes.Web.Areas.Posts.Controllers
 {
     using System.Threading.Tasks;
 
@@ -41,9 +41,16 @@ namespace TrendyMemes.Web.Areas.Posts.Controllers
             });
         }
 
-        [HttpGet]
+        [HttpGet(nameof(Edit))]
         [Authorize]
         public IActionResult Edit()
+        {
+            return this.View();
+        }
+
+        [HttpPost(nameof(Edit))]
+        [Authorize]
+        public IActionResult Edit(CommentCreateInputModel input)
         {
             return this.View();
         }
