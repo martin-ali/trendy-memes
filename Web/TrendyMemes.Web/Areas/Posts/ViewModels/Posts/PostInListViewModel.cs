@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.ViewModels.Posts
+﻿namespace TrendyMemes.Web.Areas.Posts.ViewModels.Posts
 {
     using System.Collections.Generic;
     using System.IO;
@@ -29,7 +29,7 @@ namespace TrendyMemes.Web.Areas.Posts.ViewModels.Posts
 
         public string ImageExtension { get; set; }
 
-        public int Score { get; set; }
+        public int Rating { get; set; }
 
         public IEnumerable<TagInListViewModel> Tags { get; set; }
 
@@ -37,12 +37,10 @@ namespace TrendyMemes.Web.Areas.Posts.ViewModels.Posts
         {
             // NOTE: This is a hack for an issue I could not solve. The code sucks and I am ashamed of it, but time is of the essence
             configuration.CreateMap<Post, PostInListViewModel>()
-                .ForMember(vm => vm.Score, opt => opt.MapFrom(p => p.Votes.Sum(v => v.Value)))
                 .ForMember(vm => vm.ImagePath, opt => opt.MapFrom(p => Path.Combine(@"images", $"{p.ImageId}.{p.Image.Extension}")));
 
             // FIXME: Copy-paste. How to avoid?
             configuration.CreateMap<Post, PostDetailsViewModel>()
-                .ForMember(vm => vm.Score, opt => opt.MapFrom(p => p.Votes.Sum(v => v.Value)))
                 .ForMember(vm => vm.ImagePath, opt => opt.MapFrom(p => Path.Combine(@"images", $"{p.ImageId}.{p.Image.Extension}")));
         }
     }
