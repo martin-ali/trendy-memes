@@ -110,12 +110,6 @@ namespace TrendyMemes.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            // app.UseStaticFiles(new StaticFileOptions
-            // {
-            //     FileProvider = new PhysicalFileProvider(
-            // Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images")),
-            //     RequestPath = "/wwwroot/images"
-            // });
             app.UseCookiePolicy();
 
             app.UseRouting();
