@@ -1,10 +1,10 @@
-﻿namespace TrendyMemes.Web.Areas.Comments.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Threading.Tasks;
 
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
-    using TrendyMemes.Web.Areas.Comments.ViewModels;
+    using TrendyMemes.Web.Areas.Posts.ViewModels.Comments;
 
     public class CommentsService : ICommentsService
     {

@@ -1,9 +1,9 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using TrendyMemes.Web.Areas.Posts.ViewModels;
+    using TrendyMemes.Web.Areas.Posts.ViewModels.Posts;
 
     public interface IPostsService
     {

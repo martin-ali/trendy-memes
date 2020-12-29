@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Comments.Controllers
+namespace TrendyMemes.Web.Areas.Posts.Controllers
 {
     using System.Threading.Tasks;
 

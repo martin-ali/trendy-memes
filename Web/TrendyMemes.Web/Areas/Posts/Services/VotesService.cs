@@ -1,5 +1,7 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
+    using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using TrendyMemes.Data.Common.Repositories;

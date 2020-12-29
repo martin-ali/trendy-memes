@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Controllers
+namespace TrendyMemes.Web.Areas.Posts.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,7 +10,7 @@
     using TrendyMemes.Common;
     using TrendyMemes.Data.Models;
     using TrendyMemes.Web.Areas.Posts.Services;
-    using TrendyMemes.Web.Areas.Posts.ViewModels;
+    using TrendyMemes.Web.Areas.Posts.ViewModels.Posts;
     using TrendyMemes.Web.Controllers;
 
     [Area(GlobalConstants.PostsArea)]

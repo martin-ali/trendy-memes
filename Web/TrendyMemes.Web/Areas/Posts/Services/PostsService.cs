@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.IO;
@@ -10,37 +10,30 @@
     using TrendyMemes.Services.IO;
     using TrendyMemes.Services.Mapping;
     using TrendyMemes.Services.Validation;
-    using TrendyMemes.Web.Areas.Posts.ViewModels;
-    using TrendyMemes.Web.Areas.Tags.Services;
+    using TrendyMemes.Web.Areas.Posts.ViewModels.Posts;
 
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
+        private readonly IDeletableEntityRepository<PostTag> postTagsRepository;
         private readonly ITagsService tagsService;
-        private readonly IFileWriter fileWriter;
-        private readonly IFileValidator fileValidator;
+        private readonly IImagesService imagesService;
 
         public PostsService(
             IDeletableEntityRepository<Post> postsRepository,
+            IDeletableEntityRepository<PostTag> postTagsRepository,
             ITagsService tagsService,
-            IFileWriter fileWriter,
-            IFileValidator fileValidator)
+            IImagesService imagesService)
         {
             this.postsRepository = postsRepository;
+            this.postTagsRepository = postTagsRepository;
             this.tagsService = tagsService;
-            this.fileWriter = fileWriter;
-            this.fileValidator = fileValidator;
+            this.imagesService = imagesService;
         }
 
         public IEnumerable<T> GetAll<T>()
         {
-            var posts = this.postsRepository
-                .AllAsNoTracking()
-                .OrderByDescending(p => p.Votes.Sum(v => v.Value))
-                .To<T>()
-                .ToList();
-
-            return posts;
+            return this.GetTopPercent<T>(0, 100);
         }
 
         public IEnumerable<T> GetTopPercent<T>(double percentageToSkip, double percentageToTake)

@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Tags.Controllers
+namespace TrendyMemes.Web.Areas.Posts.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 

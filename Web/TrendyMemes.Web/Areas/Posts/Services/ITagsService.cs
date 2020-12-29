@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Tags.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

@@ -1,10 +1,10 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.ViewModels
+namespace TrendyMemes.Web.Areas.Posts.ViewModels.Posts
 {
     using System.Collections.Generic;
 
     using TrendyMemes.Data.Models;
     using TrendyMemes.Services.Mapping;
-    using TrendyMemes.Web.ViewModels.Comments;
+    using TrendyMemes.Web.Areas.Posts.ViewModels.Comments;
 
     public class PostDetailsViewModel : PostInListViewModel, IMapFrom<Post>
     {

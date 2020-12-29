@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.ViewModels.Comments
+namespace TrendyMemes.Web.Areas.Posts.ViewModels.Comments
 {
     using TrendyMemes.Data.Models;
     using TrendyMemes.Services.Mapping;
