@@ -1,0 +1,17 @@
+@model TrendyMemes.Web.Areas.Posts.ViewModels.Comments.CommentListViewModel
+
+<div class="w-100 card card-body m-2">
+    <a asp-area="Identity" asp-controller="Users" asp-action="Details" asp-route-id="@Model.AuthorId">
+        <h6 class="h6"> @Model.AuthorUsername </h6>
+    </a>
+    <p>@Model.Content</p>
+    @* @if (User.Identity.IsAuthenticated)
+        {
+        <a class="btn btn-secondary">Reply</a>
+        } *@
+    @* @if (UserId)
+        {
+        <a class="btn btn-secondary">Edit</a>
+        <a class="btn btn-secondary">Delete</a>
+        } *@
+</div>
