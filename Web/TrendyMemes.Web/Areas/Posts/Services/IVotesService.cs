@@ -4,6 +4,6 @@
 
     public interface IVotesService
     {
-        Task VoteOnPostAsync(int postId, string userId, int value);
+        Task<int> VoteOnPostAsync(int postId, string userId, int value);
     }
 }

@@ -25,23 +25,28 @@
 
         [HttpGet(nameof(Upvote))]
         [Authorize]
-        public async Task Upvote(int id)
+        public async Task<int> Upvote(int id)
         {
-            await this.VoteOnPost(id, 1);
+            var rating = await this.VoteOnPost(id, 1);
+
+            return rating;
         }
 
         [HttpGet(nameof(Downvote))]
         [Authorize]
-        public async Task Downvote(int id)
+        public async Task<int> Downvote(int id)
         {
-            await this.VoteOnPost(id, -1);
+            var rating = await this.VoteOnPost(id, -1);
+
+            return rating;
         }
 
-        private async Task VoteOnPost(int id, int value)
+        private async Task<int> VoteOnPost(int id, int value)
         {
             var user = await this.userManager.GetUserAsync(this.User);
+            var rating = await this.votesService.VoteOnPostAsync(id, user.Id, value);
 
-            await this.votesService.VoteOnPostAsync(id, user.Id, value);
+            return rating;
         }
     }
 }
