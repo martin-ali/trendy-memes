@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -35,16 +35,11 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
         public Tag GetByName(string name)
         {
+            // Apparently tags are case insensitive in this project
+            // I have no idea how to fix this
             var tag = this.tagsRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(t => t.Name == name);
-
-            // FIXME: String comparison
-            // String comparison issue. In the above line, comparison is case insensitive for some reason. I don't know how to fix it, so I've added this WTF segment of code
-            if (tag?.Name != name)
-            {
-                return null;
-            }
 
             return tag;
         }
@@ -54,7 +49,10 @@ namespace TrendyMemes.Web.Areas.Posts.Services
             var tag = new Tag { Name = name };
 
             await this.tagsRepository.AddAsync(tag);
+            await this.tagsRepository.SaveChangesAsync();
 
+            return tag;
+        }
 
         public async Task<Tag> GuaranteeTagAsync(string name)
         {
