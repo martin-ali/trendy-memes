@@ -24,16 +24,22 @@
                 var user = users[random.Next(0, users.Count)];
                 var post = posts[random.Next(0, posts.Count)];
 
+                if (post.Votes.Any(v => v.UserId == user.Id))
+                {
+                    continue;
+                }
+
                 // Generate random of either -1 or 1, but not 0
                 var value = (random.Next(0, 2) * 2) - 1;
 
                 var vote = new Vote
                 {
+                    PostId = post.Id,
+                    UserId = user.Id,
                     Value = value,
                 };
 
-                user.Votes.Add(vote);
-                post.Votes.Add(vote);
+                post.Rating += value;
 
                 await dbContext.Votes.AddAsync(vote);
             }

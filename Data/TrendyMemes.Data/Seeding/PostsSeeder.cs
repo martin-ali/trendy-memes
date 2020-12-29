@@ -19,18 +19,19 @@
 
             var users = dbContext.Users.ToList();
             var tags = dbContext.Tags.ToList();
-            var images = dbContext.Images.ToList();
+            var images = new Queue<Image>(dbContext.Images);
             var random = new Random();
 
-            for (int i = 0; i < 100; i++)
+            var current = 0;
+            while (images.Any())
             {
                 var author = users[random.Next(0, users.Count)];
-                var image = images[random.Next(0, images.Count)];
+                var image = images.Dequeue();
 
                 // Main properties
                 var post = new Post
                 {
-                    Title = $"Post-{i + 1}",
+                    Title = $"Post-{current + 1}",
                     Author = author,
                     Image = image,
                 };
@@ -40,6 +41,12 @@
                 for (int j = 0; j < tagsCount; j++)
                 {
                     var tag = tags[random.Next(0, tags.Count)];
+
+                    if (post.Tags.Any(pt => pt.TagId == tag.Id))
+                    {
+                        continue;
+                    }
+
                     var postTag = new PostTag
                     {
                         PostId = post.Id,
@@ -47,7 +54,8 @@
                     };
 
                     post.Tags.Add(postTag);
-                    tag.Posts.Add(postTag);
+
+                    current++;
                 }
 
                 await dbContext.Posts.AddAsync(post);
