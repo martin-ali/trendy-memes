@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Controllers
+﻿namespace TrendyMemes.Web.Areas.Posts.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -71,6 +71,15 @@ namespace TrendyMemes.Web.Areas.Posts.Controllers
             return this.View(PostsListView, viewModel);
         }
 
+        [HttpGet("ByUser")]
+        public IActionResult ByUserId(string id)
+        {
+            var posts = this.postsService.GetByUserId<PostInListViewModel>(id);
+            var viewModel = new PostsListViewModel { Posts = posts };
+
+            return this.View(PostsListView, viewModel);
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult Create()
@@ -94,18 +103,37 @@ namespace TrendyMemes.Web.Areas.Posts.Controllers
             return this.RedirectToAction(nameof(this.Details), new { id = newPostId });
         }
 
-        [HttpGet]
+        [HttpGet(nameof(Edit) + "/{id}")]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return this.View();
+            var post = this.postsService.GetById<PostEditInputModel>(id);
+
+            return this.View(post);
+        }
+
+        [HttpPost(nameof(Edit) + "/{id}")]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Edit(int id, PostEditInputModel input)
+        {
+            if (this.ModelState.IsValid == false)
+            {
+                return this.View(input);
+            }
+
+            var tags = input.Tags.Split(' ', System.StringSplitOptions.RemoveEmptyEntries).Distinct();
+            await this.postsService.UpdateAsync(input, id, tags);
+
+            return this.RedirectToAction(nameof(this.Details), new { id });
         }
 
         [HttpGet]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int id)
         {
-            return this.View();
+            await this.postsService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(HomeController.Index), ControllerHelpers.GetControllerName(nameof(HomeController)), new { area = GlobalConstants.HomeArea });
         }
     }
 }
