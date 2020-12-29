@@ -8,9 +8,8 @@ namespace TrendyMemes.Web.Areas.Posts.Controllers
 
     using TrendyMemes.Common;
     using TrendyMemes.Data.Models;
-    using TrendyMemes.Web.Areas.Comments.Services;
-    using TrendyMemes.Web.Areas.Comments.ViewModels;
-    using TrendyMemes.Web.Areas.Posts.Controllers;
+    using TrendyMemes.Web.Areas.Posts.Services;
+    using TrendyMemes.Web.Areas.Posts.ViewModels.Comments;
     using TrendyMemes.Web.Controllers;
 
     [Area(GlobalConstants.PostsArea)]
