@@ -13,7 +13,7 @@
 
     public class ImagesSeeder : ISeeder
     {
-        // This is a magic string
+        // FIXME:  This is a magic string
         private const string ImagesSeedingRelativeDirectory = @"Data\TrendyMemes.Data\Seeding\Images";
 
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
