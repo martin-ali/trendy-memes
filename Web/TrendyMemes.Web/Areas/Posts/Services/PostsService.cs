@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.IO;
@@ -49,6 +49,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
                 .OrderByDescending(p => p.Votes.Sum(v => v.Value))
                 .Skip(postsToSkip)
                 .Take(postsToTake)
+                .OrderByDescending(p => p.CreatedOn)
                 .To<T>()
                 .ToList();
 
@@ -96,41 +97,76 @@ namespace TrendyMemes.Web.Areas.Posts.Services
                 AuthorId = authorId,
             };
 
-            foreach (var tagName in inputTags)
+            foreach (var name in inputTags)
             {
-                var tag = this.tagsService.GetByName(tagName);
-
-                if (tag == null)
-                {
-                    tag = await this.tagsService.CreateTagAsync(tagName);
-                }
+                var tag = await this.tagsService.GuaranteeTagAsync(name);
 
                 var postTag = new PostTag
                 {
                     Post = post,
-                    Tag = tag,
+                    TagId = tag.Id,
                 };
 
                 post.Tags.Add(postTag);
             }
 
-            // I'm not 100% sure whether to leave the validation here or move it to the controller
-            var extension = Path.GetExtension(input.Image.FileName).TrimStart('.');
-            this.fileValidator.ThrowIfExtensionIsInvalid(extension);
-
-            var image = new Image
-            {
-                UserAddedId = authorId,
-                Extension = extension,
-            };
-
+            var image = await this.imagesService.CreateImage(input.Image, authorId);
             post.Image = image;
-            await this.fileWriter.WriteImageFromHttp(input.Image, image.Id.ToString(), extension);
 
             await this.postsRepository.AddAsync(post);
             await this.postsRepository.SaveChangesAsync();
 
             return post.Id;
+        }
+
+        public async Task<int> UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags)
+        {
+            var post = this.postsRepository.All()
+                .FirstOrDefault(p => p.Id == postId);
+
+            // Update title
+            post.Title = input.Title;
+
+            foreach (var name in inputTags)
+            {
+                if (post.Tags.Any(pt => pt.Tag.Name == name))
+                {
+                    continue;
+                }
+
+                var tag = await this.tagsService.GuaranteeTagAsync(name);
+                this.GuaranteePostTag(post, tag);
+            }
+
+            await this.postsRepository.SaveChangesAsync();
+
+            return post.Id;
+        }
+
+        public async Task DeleteAsync(int postId)
+        {
+            var post = this.postsRepository.All()
+                .FirstOrDefault(p => p.Id == postId);
+
+            this.postsRepository.Delete(post);
+
+            await this.postsRepository.SaveChangesAsync();
+        }
+
+        private void GuaranteePostTag(Post post, Tag tag)
+        {
+            var postTag = post.Tags.FirstOrDefault(pt => pt.TagId == tag.Id);
+
+            if (postTag == null)
+            {
+                postTag = new PostTag
+                {
+                    Post = post,
+                    TagId = tag.Id,
+                };
+
+                post.Tags.Add(postTag);
+            }
         }
     }
 }

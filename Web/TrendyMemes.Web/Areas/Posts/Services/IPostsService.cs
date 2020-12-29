@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -18,5 +18,9 @@ namespace TrendyMemes.Web.Areas.Posts.Services
         Task<int> CreateAsync(PostCreateInputModel input, string authorId, IEnumerable<string> inputTags);
 
         IEnumerable<T> GetByUserId<T>(string userId);
+
+        Task<int> UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags);
+
+        Task DeleteAsync(int postId);
     }
 }
