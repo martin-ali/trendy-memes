@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.IO;
@@ -153,7 +153,7 @@
             await this.postsRepository.SaveChangesAsync();
         }
 
-        private void GuaranteePostTag(Post post, Tag tag)
+        private void GuaranteePostHasTag(Post post, Tag tag)
         {
             var postTag = post.Tags.FirstOrDefault(pt => pt.TagId == tag.Id);
 
