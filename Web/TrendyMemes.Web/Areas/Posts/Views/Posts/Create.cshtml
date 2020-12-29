@@ -1,26 +1,35 @@
-@model TrendyMemes.Web.Areas.Posts.ViewModels.PostCreateInputModel
-<div class="container">
+@model TrendyMemes.Web.Areas.Posts.ViewModels.Posts.PostCreateInputModel
+
+<div class="container card card-body">
     <div class="row">
-        <form asp-action="Create" method="post" enctype="multipart/form-data" class="col-md-8">
-            <div class="row">
-                <h2>Create a new post</h2>
-            </div>
-            <div class="row">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" placeholder="Enter the title here" />
-            </div>
-            <div class="row">
-                <label asp-for="Tags"></label>
-                <input asp-for="Tags" class="form-control" placeholder="Enter the tags here, separated by a space" />
-            </div>
-            <div class="row">
-                <label asp-for="Image">Image</label>
-                <input asp-for="Image" class="form-control" />
-            </div>
-            <br />
-            <div class="row">
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
-        </form>
+        <div class="col-md-6">
+            <form asp-action="Create" method="post" enctype="multipart/form-data" class="col-md-8">
+                <div class="row card-title">
+                    <h2>Create a new post</h2>
+                </div>
+                <div class="row">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control w-100" placeholder="Enter the title here" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <label asp-for="Tags"></label>
+                    <input asp-for="Tags" class="form-control" placeholder="Enter the tags here, separated by a space" />
+                    <span asp-validation-for="Tags" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <label asp-for="Image">Image</label>
+                    <input id="image-upload" asp-for="Image" accept="image/jpeg, image/png" class="form-control" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="row">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <img id="image-preview" class="w-100 card-img">
+        </div>
     </div>
 </div>
