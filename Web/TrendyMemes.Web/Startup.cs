@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web
+﻿namespace TrendyMemes.Web
 {
     using System.Reflection;
 
@@ -22,11 +22,9 @@ namespace TrendyMemes.Web
     using TrendyMemes.Services.Mapping;
     using TrendyMemes.Services.Messaging;
     using TrendyMemes.Services.Validation;
-    using TrendyMemes.Web.Areas.Comments.Services;
     using TrendyMemes.Web.Areas.Identity.Services;
     using TrendyMemes.Web.Areas.Posts.Services;
-    using TrendyMemes.Web.Areas.Posts.ViewModels;
-    using TrendyMemes.Web.Areas.Tags.Services;
+    using TrendyMemes.Web.Areas.Posts.ViewModels.Posts;
     using TrendyMemes.Web.ViewModels;
 
     public class Startup
@@ -80,6 +78,7 @@ namespace TrendyMemes.Web
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<IImagesService, ImagesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
