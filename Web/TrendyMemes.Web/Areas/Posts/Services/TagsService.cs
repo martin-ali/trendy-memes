@@ -68,5 +68,13 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
             return tag;
         }
+
+        public void Delete(int tagId)
+        {
+            var tag = this.tagsRepository.All()
+                .FirstOrDefault(t => t.Id == tagId);
+
+            this.tagsRepository.Delete(tag);
+        }
     }
 }

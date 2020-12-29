@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -16,5 +16,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
         Task<Tag> CreateTagAsync(string name);
 
         Task<Tag> GuaranteeTagAsync(string name);
+
+        void Delete(int tagId);
     }
 }
