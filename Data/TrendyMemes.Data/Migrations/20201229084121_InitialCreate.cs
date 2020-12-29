@@ -288,7 +288,11 @@ namespace TrendyMemes.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(type: "int", nullable: false),
-                    TagId = table.Column<int>(type: "int", nullable: false)
+                    TagId = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -425,6 +429,11 @@ namespace TrendyMemes.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_IsDeleted",
                 table: "Posts",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostTags_IsDeleted",
+                table: "PostTags",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(

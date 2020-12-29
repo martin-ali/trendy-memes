@@ -10,7 +10,7 @@ using TrendyMemes.Data;
 namespace TrendyMemes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201226190159_InitialCreate")]
+    [Migration("20201229084121_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -373,6 +373,18 @@ namespace TrendyMemes.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
@@ -380,6 +392,8 @@ namespace TrendyMemes.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("PostId");
 
