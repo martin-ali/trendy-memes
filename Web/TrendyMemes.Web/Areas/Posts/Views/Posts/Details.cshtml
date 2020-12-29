@@ -1,4 +1,6 @@
-@model TrendyMemes.Web.Areas.Posts.ViewModels.PostDetailsViewModel
+@using TrendyMemes.Web.Areas.Posts.ViewModels.Posts
+@using TrendyMemes.Web.Areas.Posts.ViewModels.Comments
+@model PostDetailsViewModel
 
 <div class="container">
     <div class="row">
@@ -6,36 +8,37 @@
             <h2 class="card-title text-center">
                 @Model.Title
             </h2>
-            <img class="card-img-top" src="@Model.ImagePath" alt="Card image cap">
+            <img class="card-img-top" src="@Model.ImagePath">
             <p class="card-text">
-                Tags:
-                @foreach (var tag in Model.Tags)
-                {
-                    <a asp-action="ByTagId" asp-route-id="@tag.Id"> @tag.Name </a>
-                }
+                <span> Author:
+                    <a asp-area="Identity" asp-controller="Users" asp-action="Details" asp-route-id="@Model.AuthorId">
+                        <span> @Model.AuthorUsername </span>
+                    </a>
+                </span>
+                <span> Tags:
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <a asp-action="ByTagId" asp-route-id="@tag.Id"> @tag.Name </a>
+                    }
+                </span>
             </p>
+            <div class="row">
+                @await Html.PartialAsync("_VotingPanel", Model)
+            </div>
+            @if (User.IsInRole("Administrator"))
+            {
+                @await Html.PartialAsync("_AdminPanel", Model)
+            }
         </div>
     </div>
     <div class="row">
         @if (User.Identity.IsAuthenticated)
         {
-            <form asp-controller="Comments" asp-action="Create" method="post" class="w-100 card-body border m-2">
-                @* <span asp-validation-for="Content" class="text-danger"></span> *@
-                <textarea name="Content" placeholder="Type your comment here" rows="3" class="w-100 border-0"></textarea>
-                <input type="hidden" name="PostId" value="@Model.Id" />
-                <button type="submit" class="btn btn-primary">Post comment</button>
-                @* <button type="reset" class="btn btn-danger">Clear</button> *@
-                @* Posting as @User.Identity.Name *@
-            </form>
+            @await Html.PartialAsync("_CommentCreateForm", new CommentCreateInputModel{ PostId=Model.Id })
         }
         @foreach (var comment in Model.Comments)
         {
-            <div class="w-100 border card-body m-2">
-                <a asp-area="Identity" asp-controller="Users" asp-action="Details" asp-route-id="@comment.AuthorId">
-                    <h6 class="h6"> @comment.AuthorUsername </h6>
-                </a>
-                <p>@comment.Content</p>
-            </div>
+            @await Html.PartialAsync("_CommentsList", comment)
         }
     </div>
 </div>
