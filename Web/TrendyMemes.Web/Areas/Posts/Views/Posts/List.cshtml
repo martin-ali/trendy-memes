@@ -1,4 +1,5 @@
-@model TrendyMemes.Web.Areas.Posts.ViewModels.PostsListViewModel;
+@model TrendyMemes.Web.Areas.Posts.ViewModels.Posts.PostsListViewModel;
+
 <div class="container-fluid">
     <div class="row">
         @foreach (var post in Model.Posts)
@@ -23,9 +24,7 @@
                         }
                     </p>
                     <div class="row">
-                        <a asp-controller="Votes" asp-action="Upvote" asp-route-id="@post.Id" class="col-md-2 btn btn-success" onclick="return false;">Upvote</a>
-                        <h3 class="col-md-2 text-center card-text @(post.Score>0?"text-success":"text-danger")"> @post.Score </h3>
-                        <a asp-controller="Votes" asp-action="Downvote" asp-route-id="@post.Id" class="col-md-2 btn btn-danger" onclick="return false;">Downvote</a>
+                        @await Html.PartialAsync("_VotingPanel", post)
                     </div>
                 </div>
             </article>

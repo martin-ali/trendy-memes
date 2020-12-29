@@ -1,0 +1,9 @@
+<a asp-controller="Votes" asp-action="Upvote" asp-route-id="@Model.Id" class="offset-md-3 col-md-2 btn btn-success upvote">
+    Upvote
+</a>
+<h3 class="col-md-2 text-center rating card-text @(Model.Rating>0?"text-success":"text-danger")">
+    @Model.Rating
+</h3>
+<a asp-controller="Votes" asp-action="Downvote" asp-route-id="@Model.Id" class="col-md-2 btn btn-danger downvote">
+    Downvote
+</a>
