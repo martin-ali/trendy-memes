@@ -37,6 +37,7 @@
     <ProjectReference Include="..\TrendyMemes.Web.Infrastructure\TrendyMemes.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TrendyMemes.Web.ViewModels\TrendyMemes.Web.ViewModels.csproj" />
     <ProjectReference Include="..\..\Services\TrendyMemes.Services.Validation\TrendyMemes.Services.Validation.csproj" />
+    <ProjectReference Include="..\..\TrendyMemes.Attributes\TrendyMemes.Attributes.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,5 +49,6 @@
     <Folder Include="Areas\Settings\Data\" />
     <Folder Include="Areas\Settings\Models\" />
     <Folder Include="Areas\Settings\Views\" />
+    <Folder Include="Areas\Home\Views\" />
   </ItemGroup>
 </Project>
