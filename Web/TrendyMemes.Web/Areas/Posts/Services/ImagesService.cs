@@ -1,6 +1,8 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
+    using System;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Http;
@@ -43,9 +45,19 @@ namespace TrendyMemes.Web.Areas.Posts.Services
             return image;
         }
 
-        public string GetImageSrcById(string id)
+        public async Task DeleteImage(string imageId)
         {
-            var path = Path.Combine(GlobalConstants.ImagesDirectory, id);
+            var image = this.imagesRepository.All()
+                .FirstOrDefault(i => i.Id == imageId);
+
+            this.imagesRepository.Delete(image);
+            await this.imagesRepository.SaveChangesAsync();
+        }
+
+        public string GetRelativeImagePath(string imageId)
+        {
+            string fileName = this.GetFileName(imageId);
+            var path = Path.Combine(GlobalConstants.ImagesDirectory, fileName);
 
             return path;
         }

@@ -10,6 +10,8 @@
     {
         Task<Image> CreateImage(IFormFile input, string authorId);
 
-        string GetImageSrcById(string id);
+        Task DeleteImage(string imageId);
+
+        string GetRelativeImagePath(string imageId);
     }
 }
