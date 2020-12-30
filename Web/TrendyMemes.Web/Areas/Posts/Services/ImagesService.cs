@@ -49,5 +49,15 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
             return path;
         }
+
+        private string GetFileName(string imageId)
+        {
+            var extension = this.imagesRepository.All()
+                .Where(i => i.Id == imageId)
+                .Select(i => $"{i.Id}.{i.Extension}")
+                .FirstOrDefault();
+
+            return extension;
+        }
     }
 }
