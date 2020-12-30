@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
 
     using AutoMapper;
+    using AutoMapper.Configuration.Annotations;
 
     using TrendyMemes.Data.Models;
     using TrendyMemes.Services.Mapping;
@@ -29,8 +29,10 @@
 
         public string ImageExtension { get; set; }
 
+        // [SourceMember(nameof(Post.GetRating))]
         public int Rating { get; set; }
 
+        [SourceMember(nameof(Post.PostTags))]
         public IEnumerable<TagInListViewModel> Tags { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
