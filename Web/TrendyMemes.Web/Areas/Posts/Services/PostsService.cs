@@ -156,9 +156,15 @@ namespace TrendyMemes.Web.Areas.Posts.Services
         private void GuaranteePostHasTag(Post post, Tag tag)
         {
             var postTag = post.Tags.FirstOrDefault(pt => pt.TagId == tag.Id);
+        private async Task GuaranteePostHasTag(Post post, string tagName)
+        {
+            var postTag = this.postTagsRepository.AllAsNoTracking()
+                .FirstOrDefault(pt => pt.Tag.Name == tagName);
 
             if (postTag == null)
             {
+                var tag = await this.tagsService.GuaranteeTagAsync(tagName);
+
                 postTag = new PostTag
                 {
                     Post = post,
