@@ -20,6 +20,7 @@
                 var user = new ApplicationUser
                 {
                     UserName = $"User-{i + 1}",
+                    Email = $"User-{i + 1}@TestMail.com",
                 };
 
                 await dbContext.Users.AddAsync(user);
