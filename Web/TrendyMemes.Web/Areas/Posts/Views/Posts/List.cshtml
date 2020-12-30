@@ -15,19 +15,25 @@
                         <img src="@post.ImagePath" alt="Post image" class="card-img-top" />
                     </a>
                     <p class="card-text">
-                        Tags:
-                        @foreach (var tag in post.Tags)
-                        {
-                            <a asp-action="ByTagId" asp-route-id="@tag.Id">
-                                @tag.Name
+                        <span> Author:
+                            <a asp-area="Identity" asp-controller="Users" asp-action="Details" asp-route-id="@post.AuthorId">
+                                <span> @post.AuthorUsername </span>
                             </a>
-                        }
-                    </p>
-                    <div class="row">
-                        @await Html.PartialAsync("_VotingPanel", post)
+                        </span>
+                        <span> Tags:
+                            @foreach (var tag in post.Tags)
+                            {
+                                <a asp-action="ByTagId" asp-route-id="@tag.Id">
+                                    @tag.Name
+                                </a>
+                            }
+                            </span>
+                        </p>
+                        <div class="row">
+                            @await Html.PartialAsync("_VotingPanel", post)
+                        </div>
                     </div>
-                </div>
-            </article>
+                </article>
         }
     </div>
 </div>
