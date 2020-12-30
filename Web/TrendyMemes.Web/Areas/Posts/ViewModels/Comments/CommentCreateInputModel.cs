@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.ViewModels.Comments
+﻿namespace TrendyMemes.Web.Areas.Posts.ViewModels.Comments
 {
     using System.ComponentModel.DataAnnotations;
 
