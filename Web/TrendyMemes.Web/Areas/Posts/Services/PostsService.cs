@@ -130,12 +130,6 @@
             // Update title
             post.Title = input.Title;
 
-            // Add new tags
-            foreach (var inputTag in inputTags)
-            {
-                await this.GuaranteePostHasTag(post, inputTag);
-            }
-
             // Delete removed tags
             foreach (var postTag in post.PostTags)
             {
@@ -145,6 +139,12 @@
                 }
 
                 this.postTagsRepository.Delete(postTag);
+            }
+
+            // Add new tags
+            foreach (var inputTag in inputTags)
+            {
+                await this.GuaranteePostHasTag(post, inputTag);
             }
 
             // this.postsRepository.Update(post);
@@ -181,7 +181,9 @@
         private async Task GuaranteePostHasTag(Post post, string tagName)
         {
             var postTag = this.postTagsRepository.AllAsNoTracking()
-                .FirstOrDefault(pt => pt.Tag.Name == tagName);
+                .Where(pt => pt.PostId == post.Id)
+                .Where(pt => pt.Tag.Name == tagName)
+                .FirstOrDefault();
 
             if (postTag == null)
             {
