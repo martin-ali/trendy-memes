@@ -1,4 +1,4 @@
-namespace TrendyMemes.Data.Models
+﻿namespace TrendyMemes.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
 
