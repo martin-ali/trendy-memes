@@ -32,7 +32,7 @@
             var users = dbContext.Users.ToList();
             var random = new Random();
 
-            var fileWriter = (IFileWriter)serviceProvider.GetService(typeof(IFileWriter));
+            var fileWriter = (IFileOperator)serviceProvider.GetService(typeof(IFileOperator));
 
             var filesCount = filePaths.Count();
             for (int i = 0; i < filesCount; i++)
@@ -50,7 +50,7 @@
                 };
 
                 var bytes = await File.ReadAllBytesAsync(seedPath);
-                await fileWriter.WriteImageFromBytes(bytes, image.Id, extension);
+                await fileWriter.Write(bytes, image.Id, extension);
 
                 await dbContext.Images.AddAsync(image);
             }

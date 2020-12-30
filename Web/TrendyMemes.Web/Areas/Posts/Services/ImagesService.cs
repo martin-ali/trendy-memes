@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.IO;
     using System.Threading.Tasks;
@@ -14,13 +14,13 @@
     public class ImagesService : IImagesService
     {
         private readonly IDeletableEntityRepository<Image> imagesRepository;
-        private readonly IFileWriter fileWriter;
+        private readonly IFileOperator fileOperator;
         private readonly IFileValidator fileValidator;
 
-        public ImagesService(IDeletableEntityRepository<Image> imagesRepository, IFileWriter fileWriter, IFileValidator fileValidator)
+        public ImagesService(IDeletableEntityRepository<Image> imagesRepository, IFileOperator fileOperator, IFileValidator fileValidator)
         {
             this.imagesRepository = imagesRepository;
-            this.fileWriter = fileWriter;
+            this.fileOperator = fileOperator;
             this.fileValidator = fileValidator;
         }
 
@@ -35,7 +35,7 @@
                 Extension = extension,
             };
 
-            await this.fileWriter.WriteImageFromHttp(input, image.Id.ToString(), extension);
+            await this.fileOperator.Write(input, image.Id.ToString(), extension);
             await this.imagesRepository.AddAsync(image);
 
             await this.imagesRepository.SaveChangesAsync();

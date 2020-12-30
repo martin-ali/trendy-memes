@@ -8,13 +8,13 @@
 
     using TrendyMemes.Common;
 
-    public class FileWriter : IFileWriter
+    public class ImageOperator : IFileOperator
     {
         private readonly IWebHostEnvironment environment;
 
         private readonly string imagesPath;
 
-        public FileWriter(IWebHostEnvironment environment)
+        public ImageOperator(IWebHostEnvironment environment)
         {
             this.environment = environment;
             this.imagesPath = Path.Combine(this.environment.WebRootPath, GlobalConstants.ImagesDirectory);
@@ -22,7 +22,7 @@
             Directory.CreateDirectory(this.imagesPath);
         }
 
-        public async Task WriteImageFromHttp(IFormFile file, string fileName, string extension)
+        public async Task Write(IFormFile file, string fileName, string extension)
         {
             var fileNameAndExtension = $"{fileName}.{extension}";
 
@@ -31,10 +31,18 @@
             await file.CopyToAsync(fileStream);
         }
 
-        public async Task WriteImageFromBytes(byte[] image, string name, string extension)
+        public async Task Write(byte[] image, string name, string extension)
         {
             var path = Path.Combine(this.imagesPath, $"{name}.{extension}");
             await File.WriteAllBytesAsync(path, image);
+        }
+
+        public void Delete(string id, string extension)
+        {
+            var fileName = $"{id}.{extension}";
+            var path = Path.Combine(this.imagesPath, fileName);
+
+            File.Delete(path);
         }
     }
 }
