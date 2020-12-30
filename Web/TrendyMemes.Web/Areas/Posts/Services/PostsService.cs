@@ -148,6 +148,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
                 .FirstOrDefault(p => p.Id == postId);
 
             this.postsRepository.Delete(post);
+            await this.imagesService.DeleteImage(post.ImageId);
 
             await this.postsRepository.SaveChangesAsync();
         }
