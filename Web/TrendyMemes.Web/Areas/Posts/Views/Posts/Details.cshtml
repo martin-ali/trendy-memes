@@ -20,14 +20,14 @@
                     {
                         <a asp-action="ByTagId" asp-route-id="@tag.Id"> @tag.Name </a>
                     }
-                    </span>
-                </p>
-                <div class="row">
-                    @await Html.PartialAsync("_VotingPanel", Model)
-                </div>
+                </span>
+            </p>
+            <div class="row">
+                @await Html.PartialAsync("_VotingPanel", Model)
             </div>
         </div>
-        @if (User.IsInRole("Administrator"))
+    </div>
+    @if (User.IsInRole("Administrator"))
     {
         <div class="row">
             @await Html.PartialAsync("_AdminPanel", Model)
@@ -38,9 +38,9 @@
         {
             @await Html.PartialAsync("_CommentCreateForm", new CommentCreateInputModel{ PostId=Model.Id })
         }
-            @foreach (var comment in Model.Comments)
+        @foreach (var comment in Model.Comments)
         {
             @await Html.PartialAsync("_CommentsList", comment)
         }
-        </div>
     </div>
+</div>

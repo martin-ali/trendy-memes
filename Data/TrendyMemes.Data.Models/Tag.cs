@@ -9,13 +9,13 @@
     {
         public Tag()
         {
-            this.Posts = new List<PostTag>();
+            this.PostTags = new List<PostTag>();
         }
 
         [Required]
         [MinLength(2)]
         public string Name { get; set; }
 
-        public virtual ICollection<PostTag> Posts { get; set; }
+        public virtual ICollection<PostTag> PostTags { get; set; }
     }
 }

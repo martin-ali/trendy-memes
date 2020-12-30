@@ -71,7 +71,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
         {
             var postsByTag = this.postsRepository
                 .AllAsNoTracking()
-                .Where(p => p.Tags.Any(t => t.TagId == tagId))
+                .Where(p => p.PostTags.Any(t => t.TagId == tagId))
                 .To<T>()
                 .ToList();
 
@@ -107,7 +107,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
                     TagId = tag.Id,
                 };
 
-                post.Tags.Add(postTag);
+                post.PostTags.Add(postTag);
             }
 
             var image = await this.imagesService.CreateImage(input.Image, authorId);
@@ -165,7 +165,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
                     TagId = tag.Id,
                 };
 
-                post.Tags.Add(postTag);
+                post.PostTags.Add(postTag);
             }
         }
     }

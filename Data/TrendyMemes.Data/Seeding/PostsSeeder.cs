@@ -42,7 +42,7 @@
                 {
                     var tag = tags[random.Next(0, tags.Count)];
 
-                    if (post.Tags.Any(pt => pt.TagId == tag.Id))
+                    if (post.PostTags.Any(pt => pt.TagId == tag.Id))
                     {
                         continue;
                     }
@@ -53,7 +53,7 @@
                         TagId = tag.Id,
                     };
 
-                    post.Tags.Add(postTag);
+                    post.PostTags.Add(postTag);
 
                     current++;
                 }
