@@ -1,15 +1,14 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
-    using TrendyMemes.Services.IO;
     using TrendyMemes.Services.Mapping;
-    using TrendyMemes.Services.Validation;
     using TrendyMemes.Web.Areas.Posts.ViewModels.Posts;
 
     public class PostsService : IPostsService
@@ -121,25 +120,35 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
         public async Task UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags)
         {
-            var post = this.postsRepository.All()
-                .FirstOrDefault(p => p.Id == postId);
+            var post = this.postsRepository
+                .All()
+                .Include(p => p.PostTags)
+                .ThenInclude(pt => pt.Tag)
+                .Where(p => p.Id == postId)
+                .FirstOrDefault();
 
             // Update title
             post.Title = input.Title;
 
-            foreach (var name in inputTags)
+            // Add new tags
+            foreach (var inputTag in inputTags)
             {
-                if (post.Tags.Any(pt => pt.Tag.Name == name))
+                await this.GuaranteePostHasTag(post, inputTag);
+            }
+
+            // Delete removed tags
+            foreach (var postTag in post.PostTags)
+            {
+                if (inputTags.Contains(postTag.Tag.Name))
                 {
                     continue;
                 }
 
-                var tag = await this.tagsService.GuaranteeTagAsync(name);
-                this.GuaranteePostTag(post, tag);
+                this.postTagsRepository.Delete(postTag);
             }
 
+            // this.postsRepository.Update(post);
             await this.postsRepository.SaveChangesAsync();
-
         }
 
         public async Task DeleteAsync(int postId)
@@ -156,6 +165,19 @@ namespace TrendyMemes.Web.Areas.Posts.Services
         private void GuaranteePostHasTag(Post post, Tag tag)
         {
             var postTag = post.PostTags.FirstOrDefault(pt => pt.TagId == tag.Id);
+
+            if (postTag == null)
+            {
+                postTag = new PostTag
+                {
+                    Post = post,
+                    TagId = tag.Id,
+                };
+
+                post.PostTags.Add(postTag);
+            }
+        }
+
         private async Task GuaranteePostHasTag(Post post, string tagName)
         {
             var postTag = this.postTagsRepository.AllAsNoTracking()
