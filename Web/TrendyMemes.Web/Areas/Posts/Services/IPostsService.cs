@@ -19,7 +19,7 @@
 
         IEnumerable<T> GetByUserId<T>(string userId);
 
-        Task<int> UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags);
+        Task UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags);
 
         Task DeleteAsync(int postId);
     }

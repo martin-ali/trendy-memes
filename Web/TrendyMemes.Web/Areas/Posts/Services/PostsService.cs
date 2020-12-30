@@ -119,7 +119,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
             return post.Id;
         }
 
-        public async Task<int> UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags)
+        public async Task UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags)
         {
             var post = this.postsRepository.All()
                 .FirstOrDefault(p => p.Id == postId);
@@ -140,7 +140,6 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
             await this.postsRepository.SaveChangesAsync();
 
-            return post.Id;
         }
 
         public async Task DeleteAsync(int postId)
