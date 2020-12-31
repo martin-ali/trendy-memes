@@ -20,35 +20,27 @@
 
         public async Task<int> VoteOnPostAsync(int postId, string userId, int value)
         {
-            var sumOfPreviousVotes = this.GetSumOfPreviousVoteValues(postId, userId);
-            await this.DeleteAllWhere(v => v.UserId == userId && v.PostId == postId);
+            var vote = this.votesRepository.All()
+                .FirstOrDefault(v => v.UserId == userId);
 
-            var vote = new Vote
+            if (vote == null)
             {
-                PostId = postId,
-                UserId = userId,
-                Value = value,
-            };
+                vote = new Vote
+                {
+                    PostId = postId,
+                    UserId = userId,
+                };
+
+                await this.votesRepository.AddAsync(vote);
+            }
+
+            vote.Value = value;
+            await this.votesRepository.SaveChangesAsync();
 
             var post = this.postsRepository.All()
                 .FirstOrDefault(p => p.Id == postId);
 
-            post.Rating -= sumOfPreviousVotes;
-            post.Rating += value;
-
-            await this.votesRepository.AddAsync(vote);
-            await this.votesRepository.SaveChangesAsync();
-
             return post.Rating;
-        }
-
-        private int GetSumOfPreviousVoteValues(int postId, string userId)
-        {
-            var sum = this.votesRepository.All()
-                           .Where(v => v.PostId == postId && v.UserId == userId)
-                           .Sum(v => v.Value);
-
-            return sum;
         }
 
         private async Task DeleteAllWhere(Func<Vote, bool> condition)
