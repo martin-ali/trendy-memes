@@ -2,7 +2,8 @@ namespace TrendyMemes.Data.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
     using TrendyMemes.Data.Common.Models;
 
     public class Post : BaseDeletableModel<int>
@@ -19,7 +20,14 @@ namespace TrendyMemes.Data.Models
         [MaxLength(20)]
         public string Title { get; set; }
 
-        public int Rating { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Rating
+        {
+            get
+            {
+                return this.Votes.Sum(v => v.Value);
+            }
+        }
 
         [Required]
         public string ImageId { get; set; }
