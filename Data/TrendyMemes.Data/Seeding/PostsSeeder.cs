@@ -54,7 +54,6 @@
                     };
 
                     post.PostTags.Add(postTag);
-
                 }
 
                 current++;
