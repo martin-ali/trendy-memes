@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -96,17 +96,9 @@ namespace TrendyMemes.Web.Areas.Posts.Services
                 AuthorId = authorId,
             };
 
-            foreach (var name in inputTags)
+            foreach (var tagName in inputTags)
             {
-                var tag = await this.tagsService.GuaranteeTagAsync(name);
-
-                var postTag = new PostTag
-                {
-                    Post = post,
-                    TagId = tag.Id,
-                };
-
-                post.PostTags.Add(postTag);
+                await this.GuaranteePostHasTagAsync(post, tagName);
             }
 
             var image = await this.imagesService.CreateImage(input.Image, authorId);
@@ -144,7 +136,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
             // Add new tags
             foreach (var inputTag in inputTags)
             {
-                await this.GuaranteePostHasTag(post, inputTag);
+                await this.GuaranteePostHasTagAsync(post, inputTag);
             }
 
             // this.postsRepository.Update(post);
@@ -178,7 +170,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
             }
         }
 
-        private async Task GuaranteePostHasTag(Post post, string tagName)
+        private async Task GuaranteePostHasTagAsync(Post post, string tagName)
         {
             var postTag = this.postTagsRepository.AllAsNoTracking()
                 .Where(pt => pt.PostId == post.Id)
@@ -188,14 +180,7 @@ namespace TrendyMemes.Web.Areas.Posts.Services
             if (postTag == null)
             {
                 var tag = await this.tagsService.GuaranteeTagExistsAsync(tagName);
-
-                postTag = new PostTag
-                {
-                    Post = post,
-                    TagId = tag.Id,
-                };
-
-                post.PostTags.Add(postTag);
+                this.GuaranteePostHasTag(post, tag);
             }
         }
     }
