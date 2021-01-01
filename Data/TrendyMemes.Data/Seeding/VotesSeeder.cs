@@ -39,8 +39,6 @@
                     Value = value,
                 };
 
-                post.Rating += value;
-
                 await dbContext.Votes.AddAsync(vote);
             }
         }
