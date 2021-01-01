@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -54,7 +54,7 @@
             return tag;
         }
 
-        public async Task<Tag> GuaranteeTagAsync(string name)
+        public async Task<Tag> GuaranteeTagExistsAsync(string name)
         {
             var tag = this.tagsRepository.AllAsNoTracking()
                 .FirstOrDefault(t => t.Name == name);

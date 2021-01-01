@@ -15,7 +15,7 @@
 
         Task<Tag> CreateTagAsync(string name);
 
-        Task<Tag> GuaranteeTagAsync(string name);
+        Task<Tag> GuaranteeTagExistsAsync(string name);
 
         void Delete(int tagId);
     }

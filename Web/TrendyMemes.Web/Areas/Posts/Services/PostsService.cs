@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Web.Areas.Posts.Services
+namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -187,7 +187,7 @@
 
             if (postTag == null)
             {
-                var tag = await this.tagsService.GuaranteeTagAsync(tagName);
+                var tag = await this.tagsService.GuaranteeTagExistsAsync(tagName);
 
                 postTag = new PostTag
                 {
