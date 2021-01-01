@@ -22,7 +22,7 @@ namespace TrendyMemes.Data.Seeding
             var images = new Queue<Image>(dbContext.Images);
             var random = new Random();
 
-            var current = 0;
+            var current = 1;
             while (images.Any())
             {
                 var author = users[random.Next(0, users.Count)];
@@ -31,7 +31,7 @@ namespace TrendyMemes.Data.Seeding
                 // Main properties
                 var post = new Post
                 {
-                    Title = $"Post-{current + 1}",
+                    Title = $"Post-{current}",
                     Author = author,
                     Image = image,
                 };
