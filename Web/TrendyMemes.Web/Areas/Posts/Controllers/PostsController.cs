@@ -56,7 +56,7 @@
         [HttpGet(nameof(New))]
         public IActionResult New()
         {
-            var posts = this.postsService.GetTopPercent<PostInListViewModel>(GlobalConstants.TopPostsPercentageInRisingCategory, GlobalConstants.PostsPercentageInNewCategory);
+            var posts = this.postsService.GetTopPercent<PostInListViewModel>(GlobalConstants.PostsPercentageInNewCategory, 100);
             var viewModel = new PostsListViewModel { Posts = posts };
 
             return this.View(PostsListView, viewModel);
