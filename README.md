@@ -2,6 +2,8 @@
 Trendy memes project repo
 
 ## Design
+### UI
+- Static menu
 ### Memes
 - Trendy
 - Rising
