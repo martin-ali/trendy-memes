@@ -10,7 +10,7 @@ using TrendyMemes.Data;
 namespace TrendyMemes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201229084121_InitialCreate")]
+    [Migration("20210101193445_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -347,9 +347,6 @@ namespace TrendyMemes.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -609,13 +606,13 @@ namespace TrendyMemes.Data.Migrations
             modelBuilder.Entity("TrendyMemes.Data.Models.PostTag", b =>
                 {
                     b.HasOne("TrendyMemes.Data.Models.Post", "Post")
-                        .WithMany("Tags")
+                        .WithMany("PostTags")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TrendyMemes.Data.Models.Tag", "Tag")
-                        .WithMany("Posts")
+                        .WithMany("PostTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -663,14 +660,14 @@ namespace TrendyMemes.Data.Migrations
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("Tags");
+                    b.Navigation("PostTags");
 
                     b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("TrendyMemes.Data.Models.Tag", b =>
                 {
-                    b.Navigation("Posts");
+                    b.Navigation("PostTags");
                 });
 #pragma warning restore 612, 618
         }
