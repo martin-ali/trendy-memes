@@ -1,4 +1,4 @@
-﻿namespace TrendyMemes.Data.Seeding
+namespace TrendyMemes.Data.Seeding
 {
     using System;
     using System.Collections.Generic;
@@ -55,9 +55,9 @@
 
                     post.PostTags.Add(postTag);
 
-                    current++;
                 }
 
+                current++;
                 await dbContext.Posts.AddAsync(post);
             }
         }
