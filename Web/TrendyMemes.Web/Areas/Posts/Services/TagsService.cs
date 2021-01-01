@@ -1,4 +1,4 @@
-namespace TrendyMemes.Web.Areas.Posts.Services
+﻿namespace TrendyMemes.Web.Areas.Posts.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -35,8 +35,8 @@ namespace TrendyMemes.Web.Areas.Posts.Services
 
         public Tag GetByName(string name)
         {
-            // Apparently tags are case insensitive in this project
-            // I have no idea how to fix this
+            // Apparently tags are case insensitive in this project. I have no idea how to fix this
+            // NOTE: Wrong collation?
             var tag = this.tagsRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(t => t.Name == name);
