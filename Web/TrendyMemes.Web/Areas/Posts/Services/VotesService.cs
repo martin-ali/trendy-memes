@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
     using TrendyMemes.Data.Common.Repositories;
     using TrendyMemes.Data.Models;
 
@@ -21,6 +23,7 @@
         public async Task<int> VoteOnPostAsync(int postId, string userId, int value)
         {
             var vote = this.votesRepository.All()
+                .Include(v => v.Post)
                 .FirstOrDefault(v => v.UserId == userId);
 
             if (vote == null)
@@ -37,10 +40,7 @@
             vote.Value = value;
             await this.votesRepository.SaveChangesAsync();
 
-            var post = this.postsRepository.All()
-                .FirstOrDefault(p => p.Id == postId);
-
-            return post.Rating;
+            return vote.Post.Rating;
         }
 
         private async Task DeleteAllWhere(Func<Vote, bool> condition)
