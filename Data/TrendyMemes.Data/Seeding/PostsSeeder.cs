@@ -1,4 +1,4 @@
-namespace TrendyMemes.Data.Seeding
+﻿namespace TrendyMemes.Data.Seeding
 {
     using System;
     using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace TrendyMemes.Data.Seeding
                 };
 
                 // Random tags
-                var tagsCount = random.Next(1, 5);
+                var tagsCount = random.Next(1, 11);
                 for (int j = 0; j < tagsCount; j++)
                 {
                     var tag = tags[random.Next(0, tags.Count)];
