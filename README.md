@@ -21,5 +21,11 @@ Trendy memes project repo
     - Post
     - Comment
 
-## Notes
+## Code
+### Notes
 - Copy-pasted _ViewImports needs to be rethought
+
+### Fixes
+- Categorization
+- Image in edit
+- Rating
