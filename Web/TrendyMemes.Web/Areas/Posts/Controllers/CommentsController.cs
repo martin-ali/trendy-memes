@@ -41,14 +41,14 @@
             });
         }
 
-        [HttpGet(nameof(Edit))]
+        [HttpGet]
         [Authorize]
         public IActionResult Edit()
         {
             return this.View();
         }
 
-        [HttpPost(nameof(Edit))]
+        [HttpPost]
         [Authorize]
         public IActionResult Edit(CommentCreateInputModel input)
         {
