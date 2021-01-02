@@ -28,7 +28,7 @@
         {
             configuration.CreateMap<Post, PostEditInputModel>()
                 .ForMember(pe => pe.Tags, opt => opt.MapFrom(p => string.Join(' ', p.PostTags.Select(t => t.Tag.Name))))
-                .ForMember(pe => pe.ImageSrc, opt => opt.MapFrom(p => Path.Combine(@"images", $"{p.ImageId}.{p.Image.Extension}")));
+                .ForMember(pe => pe.ImageSrc, opt => opt.MapFrom(p => Path.Combine(@"\images", $"{p.ImageId}.{p.Image.Extension}")));
         }
     }
 }
