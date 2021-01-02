@@ -80,14 +80,14 @@
             return this.View(PostsListView, viewModel);
         }
 
-        [HttpGet]
+        [HttpGet(nameof(Create))]
         [Authorize]
         public IActionResult Create()
         {
             return this.View();
         }
 
-        [HttpPost]
+        [HttpPost(nameof(Create))]
         [Authorize]
         public async Task<IActionResult> Create(PostCreateInputModel input)
         {
