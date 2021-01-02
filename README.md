@@ -8,6 +8,8 @@ Trendy memes project repo
 - Trendy
 - Rising
 - New
+- Voting
+    - Upvote, downvote, pull vote
 ### User
 - Create
 - Chat?
@@ -32,4 +34,5 @@ Trendy memes project repo
 - Responsive design
 
 ### Improvements
-- Getting image in viewmodels
+- Getting image in viewmodels needs to be refactored
+- Calculating votes should be moved to the database
