@@ -5,7 +5,6 @@
     using System.Linq;
 
     using AutoMapper;
-    using AutoMapper.Configuration.Annotations;
 
     using TrendyMemes.Data.Models;
     using TrendyMemes.Services.Mapping;
@@ -28,17 +27,12 @@
 
         public string ImagePath { get; set; }
 
-        public string ImageExtension { get; set; }
-
-        [SourceMember(nameof(Post.Rating))]
         public int Rating { get; set; }
 
-        // [SourceMember(nameof(Post.PostTags))]
         public IEnumerable<TagInListViewModel> Tags { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            // NOTE: This is a hack for an issue I could not solve. The code sucks and I am ashamed of it, but time is of the essence
             configuration
             .CreateMap<Post, PostInListViewModel>()
             .Include<Post, PostDetailsViewModel>()
