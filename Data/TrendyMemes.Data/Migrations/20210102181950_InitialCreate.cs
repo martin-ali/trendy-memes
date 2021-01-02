@@ -226,6 +226,7 @@ namespace TrendyMemes.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     ImageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AuthorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
