@@ -29,3 +29,4 @@ Trendy memes project repo
 - Categorization
 - Image in edit
 - Rating
+- Responsive design
