@@ -1,39 +1,10 @@
 @model TrendyMemes.Web.Areas.Posts.ViewModels.Posts.PostsListViewModel;
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         @foreach (var post in Model.Posts)
         {
-            <article class="card col-md-12 m-2">
-                <div class="card-body">
-                    <h2 class="card-title text-center">
-                        <a asp-action="Details" asp-route-id="@post.Id">
-                            @post.Title
-                        </a>
-                    </h2>
-                    <a asp-action="Details" asp-route-id="@post.Id">
-                        <img src="@post.ImagePath" alt="Post image" class="card-img-top" />
-                    </a>
-                    <p class="card-text">
-                        <span> Author:
-                            <a asp-area="Identity" asp-controller="Users" asp-action="Details" asp-route-id="@post.AuthorId">
-                                <span> @post.AuthorUsername </span>
-                            </a>
-                        </span>
-                        <span> Tags:
-                            @foreach (var tag in post.Tags)
-                            {
-                                <a asp-action="ByTagId" asp-route-id="@tag.Id">
-                                    @tag.Name
-                                </a>
-                            }
-                        </span>
-                    </p>
-                    <div class="row">
-                        @await Html.PartialAsync("_VotingPanel", post)
-                    </div>
-                </div>
-            </article>
+            @await Html.PartialAsync("_PostInList", post)
         }
     </div>
 </div>
