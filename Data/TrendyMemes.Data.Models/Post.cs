@@ -21,14 +21,7 @@
         [MaxLength(20)]
         public string Title { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public int Rating
-        {
-            get
-            {
-                return this.Votes.Sum(v => v.Value);
-            }
-        }
+        public int Rating { get; set; }
 
         [Required]
         public string ImageId { get; set; }

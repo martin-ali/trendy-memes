@@ -23,8 +23,11 @@
         public async Task<int> VoteOnPostAsync(int postId, string userId, int value)
         {
             var vote = this.votesRepository.All()
+                .Where(v => v.PostId == postId)
+                .Where(v => v.UserId == userId)
                 .Include(v => v.Post)
-                .FirstOrDefault(v => v.UserId == userId);
+                .ThenInclude(p => p.Votes)
+                .FirstOrDefault();
 
             if (vote == null)
             {
@@ -38,9 +41,16 @@
             }
 
             vote.Value = value;
+
+            // FIXME: Post is not included in the vote query, this is a workaround. Should find the cause and fix it
+            var post = this.postsRepository.All()
+                .Include(p => p.Votes)
+                .FirstOrDefault(p => p.Id == postId);
+            post.Rating = post.Votes.Sum(v => v.Value);
+
             await this.votesRepository.SaveChangesAsync();
 
-            return vote.Post.Rating;
+            return post.Rating;
         }
 
         private async Task DeleteAllWhere(Func<Vote, bool> condition)
