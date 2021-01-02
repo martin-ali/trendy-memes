@@ -30,3 +30,6 @@ Trendy memes project repo
 - Image in edit
 - Rating
 - Responsive design
+
+### Improvements
+- Getting image in viewmodels
