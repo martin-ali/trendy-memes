@@ -1,9 +1,10 @@
-namespace TrendyMemes.Data.Models
+﻿namespace TrendyMemes.Data.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+
     using TrendyMemes.Data.Common.Models;
 
     public class Post : BaseDeletableModel<int>
