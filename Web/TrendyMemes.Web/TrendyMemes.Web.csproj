@@ -37,7 +37,6 @@
     <ProjectReference Include="..\TrendyMemes.Web.Infrastructure\TrendyMemes.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TrendyMemes.Web.ViewModels\TrendyMemes.Web.ViewModels.csproj" />
     <ProjectReference Include="..\..\Services\TrendyMemes.Services.Validation\TrendyMemes.Services.Validation.csproj" />
-    <ProjectReference Include="..\..\TrendyMemes.Attributes\TrendyMemes.Attributes.csproj" />
   </ItemGroup>
 
   <ItemGroup>
