@@ -41,6 +41,7 @@
             return rating;
         }
 
+        [NonAction]
         private async Task<int> VoteOnPost(int id, int value)
         {
             var user = await this.userManager.GetUserAsync(this.User);
