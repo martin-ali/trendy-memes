@@ -43,8 +43,7 @@
             var postsToSkip = (int)(this.postsRepository.All().Count() / fractionSkip);
             var postsToTake = (int)(this.postsRepository.All().Count() / fractionTake);
 
-            var posts = this.postsRepository
-                .AllAsNoTracking()
+            var posts = this.postsRepository.AllAsNoTracking()
                 .OrderByDescending(p => p.Votes.Sum(v => v.Value))
                 .Skip(postsToSkip)
                 .Take(postsToTake)
@@ -57,8 +56,7 @@
 
         public T GetById<T>(int id)
         {
-            var post = this.postsRepository
-                .AllAsNoTracking()
+            var post = this.postsRepository.AllAsNoTracking()
                 .Where(p => p.Id == id)
                 .To<T>()
                 .FirstOrDefault();
@@ -68,8 +66,7 @@
 
         public IEnumerable<T> GetByTagId<T>(int tagId)
         {
-            var postsByTag = this.postsRepository
-                .AllAsNoTracking()
+            var postsByTag = this.postsRepository.AllAsNoTracking()
                 .Where(p => p.PostTags.Any(t => t.TagId == tagId))
                 .To<T>()
                 .ToList();
@@ -79,8 +76,7 @@
 
         public IEnumerable<T> GetByUserId<T>(string userId)
         {
-            var postsByTag = this.postsRepository
-                .AllAsNoTracking()
+            var postsByTag = this.postsRepository.AllAsNoTracking()
                 .Where(p => p.AuthorId == userId)
                 .To<T>()
                 .ToList();
@@ -112,8 +108,7 @@
 
         public async Task UpdateAsync(PostEditInputModel input, int postId, IEnumerable<string> inputTags)
         {
-            var post = this.postsRepository
-                .All()
+            var post = this.postsRepository.All()
                 .Include(p => p.PostTags)
                 .ThenInclude(pt => pt.Tag)
                 .Where(p => p.Id == postId)
@@ -122,7 +117,7 @@
             // Update title
             post.Title = input.Title;
 
-            // Delete removed tags
+            // Remove deleted tags
             foreach (var postTag in post.PostTags)
             {
                 if (inputTags.Contains(postTag.Tag.Name))
@@ -156,7 +151,8 @@
 
         private void GuaranteePostHasTag(Post post, Tag tag)
         {
-            var postTag = post.PostTags.FirstOrDefault(pt => pt.TagId == tag.Id);
+            var postTag = post.PostTags
+                .FirstOrDefault(pt => pt.TagId == tag.Id);
 
             if (postTag == null)
             {

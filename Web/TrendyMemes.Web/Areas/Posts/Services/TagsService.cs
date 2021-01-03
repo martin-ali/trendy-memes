@@ -18,16 +18,14 @@
 
         public IEnumerable<Tag> GetAll()
         {
-            var tags = this.tagsRepository
-                .AllAsNoTracking();
+            var tags = this.tagsRepository.AllAsNoTracking();
 
             return tags;
         }
 
         public Tag GetById(int id)
         {
-            var tag = this.tagsRepository
-                .AllAsNoTracking()
+            var tag = this.tagsRepository.AllAsNoTracking()
                 .FirstOrDefault(t => t.Id == id);
 
             return tag;
@@ -37,8 +35,7 @@
         {
             // Apparently tags are case insensitive in this project. I have no idea how to fix this
             // NOTE: Wrong collation?
-            var tag = this.tagsRepository
-                .AllAsNoTracking()
+            var tag = this.tagsRepository.AllAsNoTracking()
                 .FirstOrDefault(t => t.Name == name);
 
             return tag;
