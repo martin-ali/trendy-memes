@@ -10,6 +10,7 @@ Trendy memes project repo
 - New
 - Voting
     - Upvote, downvote, pull vote
+    - IVotable?
 ### User
 - Create
 - Chat?
