@@ -4,7 +4,7 @@
 
     using Microsoft.AspNetCore.Http;
 
-    public interface IFileOperator
+    public interface IImageOperator
     {
         Task Write(IFormFile file, string fileName, string extension);
 

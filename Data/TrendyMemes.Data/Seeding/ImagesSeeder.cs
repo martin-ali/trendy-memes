@@ -32,7 +32,7 @@
             var users = dbContext.Users.ToList();
             var random = new Random();
 
-            var fileWriter = (IFileOperator)serviceProvider.GetService(typeof(IFileOperator));
+            var fileWriter = (IImageOperator)serviceProvider.GetService(typeof(IImageOperator));
 
             var filesCount = filePaths.Count();
             for (int i = 0; i < filesCount; i++)

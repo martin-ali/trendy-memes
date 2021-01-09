@@ -8,7 +8,7 @@
 
     using TrendyMemes.Common;
 
-    public class ImageOperator : IFileOperator
+    public class ImageOperator : IImageOperator
     {
         private readonly IWebHostEnvironment environment;
 

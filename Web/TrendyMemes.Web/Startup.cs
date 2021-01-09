@@ -73,7 +73,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<ITagsService, TagsService>();
-            services.AddTransient<IFileOperator, ImageOperator>();
+            services.AddTransient<IImageOperator, ImageOperator>();
             services.AddTransient<IFileValidator, FileValidator>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ICommentsService, CommentsService>();

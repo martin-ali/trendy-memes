@@ -16,10 +16,10 @@
     public class ImagesService : IImagesService
     {
         private readonly IDeletableEntityRepository<Image> imagesRepository;
-        private readonly IFileOperator fileOperator;
+        private readonly IImageOperator fileOperator;
         private readonly IFileValidator fileValidator;
 
-        public ImagesService(IDeletableEntityRepository<Image> imagesRepository, IFileOperator fileOperator, IFileValidator fileValidator)
+        public ImagesService(IDeletableEntityRepository<Image> imagesRepository, IImageOperator fileOperator, IFileValidator fileValidator)
         {
             this.imagesRepository = imagesRepository;
             this.fileOperator = fileOperator;
