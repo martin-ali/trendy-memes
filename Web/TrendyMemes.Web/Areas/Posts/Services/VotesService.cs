@@ -22,24 +22,7 @@
 
         public async Task<int> VoteOnPostAsync(int postId, string userId, int value)
         {
-            var vote = this.votesRepository.All()
-                .Where(v => v.PostId == postId)
-                .Where(v => v.UserId == userId)
-                .Include(v => v.Post)
-                .ThenInclude(p => p.Votes)
-                .FirstOrDefault();
-
-            if (vote == null)
-            {
-                vote = new Vote
-                {
-                    PostId = postId,
-                    UserId = userId,
-                };
-
-                await this.votesRepository.AddAsync(vote);
-            }
-
+            var vote = await this.GuaranteeVote(postId, userId);
             vote.Value = value;
 
             // FIXME: Post is not included in the vote query, this is a workaround. Should find the cause and fix it
@@ -53,17 +36,26 @@
             return post.Rating;
         }
 
-        private async Task DeleteAllWhere(Func<Vote, bool> condition)
+        private async Task<Vote> GuaranteeVote(int postId, string userId)
         {
-            var votes = this.votesRepository.All()
-                .Where(condition);
+            var vote = this.votesRepository.All()
+               .Where(v => v.PostId == postId)
+               .Where(v => v.UserId == userId)
+               .FirstOrDefault();
 
-            foreach (var vote in votes)
+            if (vote == null)
             {
-                this.votesRepository.Delete(vote);
+                vote = new Vote
+                {
+                    PostId = postId,
+                    UserId = userId,
+                };
+
+                await this.votesRepository.AddAsync(vote);
+                await this.votesRepository.SaveChangesAsync();
             }
 
-            await this.votesRepository.SaveChangesAsync();
+            return vote;
         }
     }
 }
